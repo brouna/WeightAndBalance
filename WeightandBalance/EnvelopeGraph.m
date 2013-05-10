@@ -47,6 +47,12 @@
             CGContextAddLineToPoint(cgx, i*graphSize.size.width/numYgridlines, graphSize.size.height);
      
         }
+        
+        //complete the border
+        CGContextMoveToPoint(cgx, 0, graphSize.size.height);
+        CGContextAddLineToPoint(cgx, graphSize.size.width, graphSize.size.height);
+        CGContextAddLineToPoint(cgx, graphSize.size.width, 0);
+        
         CGContextDrawPath(cgx, kCGPathStroke);
         
         CGContextBeginPath(cgx);
@@ -84,7 +90,7 @@
         
         [[NSString stringWithFormat:@"%1.0f",maxArm] drawAtPoint:CGPointMake(graphSize.size.width-maxArmSize.width, graphSize.size.height - 10) withFont:[UIFont italicSystemFontOfSize:8]];
        
-        float hScale = (graphSize.size.width/(maxArm - minArm));
+        float hScale = (graphSize.size.width/(maxArm - minArm)) ;
         float vScale = (graphSize.size.height)/(maxWeight - minWeight);
         
         

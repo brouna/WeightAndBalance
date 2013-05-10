@@ -31,15 +31,7 @@
 {
     [super viewDidLoad];
     [self setTitle:[aircraft tailNumber]];
-/*    if (!envTableView)
-        envTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [self view].bounds.size.width, 270)];
 
-    if (!graphView)
-        graphView = [[UIView alloc]initWithFrame:CGRectMake(0, 270, [self view].bounds.size.width, 150)];
-    
-    if(!graphInset)
-        graphInset = [[EnvelopeGraph alloc] init];
-*/
     [envelopePopoverView setHidden:YES];
         
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
