@@ -11,8 +11,11 @@
 #import "Datum.h"
 #import "EnvelopePoint.h"
 #import "EnvelopeGraph.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface AircraftLoadViewController ()
+@interface AircraftLoadViewController ()  <MFMailComposeViewControllerDelegate>
+
+
 
 @end
 
@@ -136,6 +139,46 @@
     [self updateAircraft];
     [self checkLimits];
     [graphInset setNeedsDisplay];
+}
+
+- (IBAction)mailLoading {       //create an email with the current loading for audit purposes
+
+    if ([MFMailComposeViewController canSendMail]) {                //make sure the device can support it
+         MFMailComposeViewController *mailView = [[MFMailComposeViewController alloc] init];
+        [mailView setMailComposeDelegate:self];
+        
+        NSString *subject =[NSString stringWithFormat:@"Weight and balance for %@",[aircraft tailNumber]];
+        [mailView setSubject:subject];
+        
+        NSDate *today = [NSDate date];
+        NSDateFormatter *df = [[NSDateFormatter alloc]init];
+        [df setDateStyle:NSDateFormatterFullStyle];
+        [df setTimeStyle:NSDateFormatterFullStyle];
+        
+        
+        NSString *text = [NSString stringWithFormat:@"Weight and Balance Calculaction\n=============================\n\nCalculated on %@\nFor %@ %@\n\n", [df stringFromDate:today], [aircraft typeName], [aircraft tailNumber]];
+  
+        
+        text = [text stringByAppendingFormat: @"Front row:%5.1f lbs %5.1f in\n",[[aircraft pilotWt]floatValue]+[[aircraft coPilotWt]floatValue],[[aircraft frontArm]floatValue]];
+        text = [text stringByAppendingFormat: @"Second row:%5.1f lbs %5.1f in\n",[[aircraft secRowLeftWt]floatValue]+[[aircraft secRowRightWt]floatValue],[[aircraft backArm]floatValue]];
+        for (NSString *k in [aircraft datums]){
+            Datum *d = [aircraft datums][k];
+            text = [text stringByAppendingFormat: @"%18@:%5.1f lbs %5.1f in\n",[d name],[d weightAsFloat],[d armAsFloat]];
+        }
+        text = [text stringByAppendingFormat:@"--------------------------------------\nTotal Weight:%5.1f lbs  Arm:%5.1f in  Moment/1000:%5.1f \n\n",[aircraft totalWeight], [aircraft totalMoment]/[aircraft totalWeight],[aircraft totalMoment]/1000];
+    
+        
+        [mailView setMessageBody:text isHTML:NO];
+        [self presentViewController:mailView animated:YES completion:nil];
+        mailView=nil;
+        
+    }
+    
+}
+
+-(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) checkLimits {

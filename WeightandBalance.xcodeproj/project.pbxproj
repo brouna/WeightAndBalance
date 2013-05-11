@@ -29,6 +29,7 @@
 		8441D94C172C607A00B8D86E /* EnvelopePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441D948172C607A00B8D86E /* EnvelopePoint.m */; };
 		8441D954172C61D500B8D86E /* AircraftStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441D953172C61D400B8D86E /* AircraftStore.m */; };
 		8441D95A172C757000B8D86E /* AircraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441D958172C713B00B8D86E /* AircraftViewController.m */; };
+		84513F78173EA0F400974CAA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84513F77173EA0F400974CAA /* MessageUI.framework */; };
 		848B93731732B376003C5D1E /* BalanceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B93721732B376003C5D1E /* BalanceResult.m */; };
 		84AAEB981732D2DD00514054 /* EnvelopeGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AAEB971732D2DD00514054 /* EnvelopeGraph.m */; };
 		84BD56801730B32B006CB8AB /* planeAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BD567F1730B32B006CB8AB /* planeAppIcon.png */; };
@@ -78,6 +79,7 @@
 		8441D953172C61D400B8D86E /* AircraftStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AircraftStore.m; path = WeightandBalance/AircraftStore.m; sourceTree = "<group>"; };
 		8441D957172C713B00B8D86E /* AircraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AircraftViewController.h; sourceTree = "<group>"; };
 		8441D958172C713B00B8D86E /* AircraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AircraftViewController.m; sourceTree = "<group>"; };
+		84513F77173EA0F400974CAA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		848B93711732B376003C5D1E /* BalanceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BalanceResult.h; path = WeightandBalance/BalanceResult.h; sourceTree = "<group>"; };
 		848B93721732B376003C5D1E /* BalanceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceResult.m; path = WeightandBalance/BalanceResult.m; sourceTree = "<group>"; };
 		84AAEB961732D2DD00514054 /* EnvelopeGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvelopeGraph.h; path = WeightandBalance/EnvelopeGraph.h; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84513F78173EA0F400974CAA /* MessageUI.framework in Frameworks */,
 				8441D91A172C5FF500B8D86E /* UIKit.framework in Frameworks */,
 				8441D91C172C5FF500B8D86E /* Foundation.framework in Frameworks */,
 				8441D91E172C5FF500B8D86E /* CoreGraphics.framework in Frameworks */,
@@ -132,6 +135,7 @@
 		8441D918172C5FF500B8D86E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84513F77173EA0F400974CAA /* MessageUI.framework */,
 				842ED80117318803009DEC1B /* QuartzCore.framework */,
 				8441D919172C5FF500B8D86E /* UIKit.framework */,
 				8441D91B172C5FF500B8D86E /* Foundation.framework */,

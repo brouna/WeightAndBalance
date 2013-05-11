@@ -27,6 +27,8 @@ extern  NSString  * const WBBasicEmptyDatum,
 -(id) initWithName:(NSString *)n;  //designated initializer
 -(id) initWithName:(NSString *)n Quantity:(NSNumber *)q WeightPerQuantity:(NSNumber *)wpq andArm:(NSNumber *)a;
 
+-(float) weightAsFloat;
+-(float) armAsFloat;
 - (float) moment;  // returns the moment of the item (total weight * arm)
 
 @end

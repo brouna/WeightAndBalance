@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
 @class Aircraft;
 @class EnvelopeGraph;
 
@@ -31,6 +33,7 @@
 
 - (IBAction)backgroundTapped :(id)sender;
 - (IBAction)updateSwitches;
+- (IBAction)mailLoading;
 
 
 @end

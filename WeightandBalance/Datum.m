@@ -45,9 +45,22 @@ NSString * const WBBasicEmptyDatum=@"Basic Empty",
     return  self;
 }
 
+-(float)weightAsFloat
+{
+    return [quantity floatValue] * [weightPerQuantity floatValue];
+}
+
+-(float)armAsFloat
+
+{
+    return [arm floatValue];
+}
+
 - (float) moment {
     return [quantity floatValue]*[weightPerQuantity floatValue]* [arm floatValue];
 }
+
+
 
 -(id) initWithName:(NSString *)n Quantity:(NSNumber *)q WeightPerQuantity:(NSNumber *)wpq andArm:(NSNumber *)a
 {
