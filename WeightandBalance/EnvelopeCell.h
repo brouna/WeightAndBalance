@@ -12,8 +12,9 @@
 
 @interface EnvelopeCell : UITableViewCell
 
-@property (weak, nonatomic) EnvelopePoint *ep;
-@property (weak, nonatomic) Aircraft *aircraft;
+@property (strong, nonatomic) EnvelopePoint *ep;
+@property (strong, nonatomic) NSNumber *maxGross;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *armLabel;

@@ -63,7 +63,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [graphInset setAircraft:aircraft];
+    [graphInset setEnvelope:aircraft.envelope];
     
     EnvelopePoint *loadPoint = [[EnvelopePoint alloc] init];
     [loadPoint setWeight:@([aircraft totalWeight])];

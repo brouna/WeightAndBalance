@@ -42,7 +42,8 @@ NSString * const WBBasicEmptyDatum=@"Basic Empty",
 
 -(id) copyWithZone:(NSZone *)zone
 {
-    return  self;
+    Datum *new = [[Datum allocWithZone:zone]initWithName:[name copy] Quantity:[quantity copy] WeightPerQuantity:[weightPerQuantity copy] andArm:[arm copy]];
+    return new;
 }
 
 -(float)weightAsFloat

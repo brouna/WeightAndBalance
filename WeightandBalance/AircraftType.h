@@ -8,18 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+#define FUEL_LBS_PER_GALLON @6.0
+#define TKS_LBS_PER_GALLON  @9.1
+
+
 @class Datum;
 @class NSString;
 
-@interface AircraftType : NSObject
 
-@property (copy) NSString *typeName;
-@property (copy) Datum *basicEmptyMoment, *fuelMoment;
-@property NSNumber *maxGross, *maxFuel, *maxBaggage, *fuelBurnRate;
-@property NSNumber *frontArm, *backArm, *baggageArm;
-
-@property (strong) NSMutableArray *envelope;  //will hold an array of envelope points
+@interface AircraftType : NSObject <NSCoding>
 
 
-
+@property (nonatomic, strong) NSString *typeName;
+@property (nonatomic, strong) NSNumber *maxGross, *maxFuel, *maxBaggage, *maxTKS, *maxO2;
+@property (nonatomic, strong) NSNumber *frontArm, *backArm;
+@property (nonatomic, strong) NSMutableDictionary *datums;
+@property (nonatomic, strong) NSMutableArray *envelope;  //will hold an array of envelope points
 @end

@@ -8,7 +8,7 @@
 
 #import "WBMasterViewController.h"
 #import "AircraftTabViewController.h"
-
+#import "WBTypeSelectViewController.h"
 
 @implementation WBMasterViewController
 
@@ -39,22 +39,9 @@
 
 - (void)insertNewObject:(id)sender
 {
- 
-    Aircraft *newPlane = [[AircraftStore defaultStore] createAircraft];
     
-    if (!self.tvc) {
-        self.tvc = [[AircraftTabViewController alloc] initWithNibName:@"AircraftTabViewController" bundle:nil];
-    }
-    
- 
-                          
-    [self.tvc setAircraft:newPlane];
-    [self.tvc setCreateNew:YES];
-    [self.navigationController pushViewController:self.tvc animated:YES];
-    
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    WBTypeSelectViewController *typeSelectView = [[WBTypeSelectViewController alloc]init];
+    [self.navigationController pushViewController:typeSelectView animated:YES];
     
 }
 

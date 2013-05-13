@@ -13,7 +13,7 @@
 
 @interface EnvelopeGraph : UIView
 
-@property (strong, nonatomic) Aircraft *aircraft;
+@property (strong, nonatomic) NSMutableArray *envelope;
 @property (strong, nonatomic) EnvelopePoint *currentLoading;
 
 @end

@@ -162,7 +162,8 @@
 - (IBAction)editEnvelope {
     EnvelopeViewController *evc = [[EnvelopeViewController alloc] init];
 
-    [evc setAircraft:aircraft];
+    [evc setEnvelope:aircraft.envelope];
+    [evc setMaxGross:aircraft.maxGross];
     [self.navigationController pushViewController:evc animated:YES];
     
 }

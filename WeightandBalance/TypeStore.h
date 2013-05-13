@@ -1,0 +1,27 @@
+//
+//  TypeStore.h
+//  WeightandBalance
+//
+//  Created by Adam on 5/11/13.
+//  Copyright (c) 2013 Adam. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+@class AircraftType;
+
+@interface TypeStore : NSObject 
+
+{
+    NSMutableArray *allTypes;
+}
+
++(TypeStore *)defaultStore;
+-(NSMutableArray *)allTypes;
+-(AircraftType *) createType;
+-(void) addType:(AircraftType *)a;
+-(void) removeType: (AircraftType *)a;
+-(void) moveAircraftTypeAtIndex:(int)from
+                              To:(int)to;
+-(BOOL) saveChanges;
+
+@end

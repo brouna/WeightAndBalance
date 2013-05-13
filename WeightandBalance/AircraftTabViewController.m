@@ -16,7 +16,7 @@
 
 @implementation AircraftTabViewController
 
-@synthesize aircraft, createNew;
+@synthesize aircraft;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,8 +44,8 @@
     [avc setEditing:YES];
     [avc setTabBarItem: [[UITabBarItem alloc] initWithTitle:@"Edit" image:[UIImage imageNamed:@"editplane30x30.png"] tag:0] ];
     [avc setAircraft:aircraft];
-    [avc setCreateNew:createNew];
-    [avc setTitle:(createNew ? @"New Aircraft" : [@"Edit " stringByAppendingString:([aircraft tailNumber]?[aircraft tailNumber]:@"")])];
+    [avc setCreateNew:([[aircraft tailNumber]isEqual:@"New"])];
+    [avc setTitle:[@"Edit " stringByAppendingString:([aircraft tailNumber]?[aircraft tailNumber]:@"")]];
     
     AircraftLoadViewController *lvc = [[AircraftLoadViewController alloc]initWithNibName:@"AircraftLoadViewController" bundle:nil];
     [lvc setEditing:YES];
@@ -54,10 +54,9 @@
    
     NSArray *vcs = @[lvc, avc];
     [self setViewControllers:vcs];
-    if (createNew)
+    if ([[aircraft tailNumber]isEqualToString:@"New"])
         [self setSelectedViewController:avc];       //For new ac, start on the edit tab
-        
-
+    
 }
 
 

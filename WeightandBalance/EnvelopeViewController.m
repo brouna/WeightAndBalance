@@ -14,6 +14,7 @@
 #import "EnvelopeGraph.h"
 #import "Aircraft.h"
 
+
 @interface EnvelopeViewController ()
 
 @end
@@ -22,15 +23,14 @@
 
 { EnvelopePoint *currentEP;    // will hold the selected row's envelope point for the purposes of editing
 }
-@synthesize aircraft;
+@synthesize envelope, maxGross;
 @synthesize envTableView, envelopePopoverView, popoverArm, popoverWeight, envelopePopoverSmallView, graphView ,tableHeaderLabel, graphInset;
-
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:[aircraft tailNumber]];
+    [self setTitle:@"Envelope"];
 
     [envelopePopoverView setHidden:YES];
         
@@ -47,7 +47,7 @@
     //assemble the views...
     [[self view] addSubview:envTableView];
     
-    [graphInset setAircraft:aircraft];
+    [graphInset setEnvelope:envelope];
     [graphInset setCurrentLoading:nil];
     [[self view] addSubview:graphView];
     [graphView setFrame:CGRectMake(0, 270, [self view].bounds.size.width, 150)];
@@ -70,7 +70,7 @@
     [newEp setArm:@0.0f];
     [newEp setWeight:@0.0f];
     
-    [[aircraft envelope] addObject:newEp];
+    [envelope addObject:newEp];
     
     [envTableView reloadData];
     [graphInset setNeedsDisplay];
@@ -118,7 +118,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[aircraft envelope]count];
+    return [envelope count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -127,8 +127,8 @@
     EnvelopeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    [cell setEp:[aircraft envelope][[indexPath row]]];
-    [cell setAircraft:aircraft];                    // cell needs the aircraft so it can warn about MGW overage
+    [cell setEp:envelope[indexPath.row]];
+    [cell setMaxGross:maxGross];                    // cell needs the Max Gross so it can warn about MGW overage
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
@@ -148,7 +148,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[aircraft envelope] removeObjectAtIndex:[indexPath row]];
+        [envelope removeObjectAtIndex:[indexPath row]];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [graphInset setNeedsDisplay];
@@ -156,7 +156,7 @@
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         EnvelopePoint *newEp = [[EnvelopePoint alloc]init];
-        [[aircraft envelope] insertObject:newEp atIndex:[indexPath row]];
+        [envelope insertObject:newEp atIndex:[indexPath row]];
         [graphInset setNeedsDisplay];
     }   
 }
@@ -164,10 +164,10 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     if (fromIndexPath != toIndexPath) {
-    EnvelopePoint *p = [aircraft envelope][[fromIndexPath row]];
+    EnvelopePoint *p = envelope [fromIndexPath.row];
     
-        [[aircraft envelope] removeObjectAtIndex:[fromIndexPath row]];
-        [[aircraft envelope] insertObject:p atIndex:[toIndexPath row]];
+        [envelope removeObjectAtIndex:[fromIndexPath row]];
+        [envelope insertObject:p atIndex:[toIndexPath row]];
         [graphInset setNeedsDisplay];
     
     }
@@ -206,7 +206,7 @@
     //grab the current data and put it in the fields
     if (!currentEP) currentEP = [[EnvelopePoint alloc]init];
     
-    currentEP = [aircraft envelope][[indexPath row]];
+    currentEP =  envelope[indexPath.row];
     
     [popoverWeight setText:[NSString stringWithFormat:@"%1.1f",[[currentEP weight]floatValue]]];
     [popoverArm setText:[NSString stringWithFormat:@"%1.1f",[[currentEP arm]floatValue]]];

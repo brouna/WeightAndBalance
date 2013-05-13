@@ -10,6 +10,7 @@
 
 #import "WBMasterViewController.h"
 #import "AircraftStore.h"
+#import "TypeStore.h"
 #import "Aircraft.h"
 #import "Datum.h"
 
@@ -40,9 +41,14 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     if ([[AircraftStore defaultStore] saveChanges])
-        NSLog(@"All aircraft saved OK");
+        NSLog(@"Aircraft saved OK");
     else
         NSLog(@"Error saving aircraft");
+    
+    if([[TypeStore defaultStore] saveChanges])
+        NSLog(@"Aircraft types saved OK");
+    else
+        NSLog(@"Error saving aircraft types");
 
 }
 

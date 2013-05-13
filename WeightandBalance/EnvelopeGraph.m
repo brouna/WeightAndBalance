@@ -10,8 +10,14 @@
 #import "Aircraft.h"
 #import "EnvelopePoint.h"
 
+#define ENVELOPE_LINE_WIDTH    2.0
+#define ENVELOPE_LINE_COLOR    redColor
+#define NUM_X_GRID_LINES   5
+#define NUM_Y_GRID_LINES   10
+
+
 @implementation EnvelopeGraph
-@synthesize aircraft, currentLoading;
+@synthesize envelope, currentLoading;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,22 +35,21 @@
     CGContextRef cgx = UIGraphicsGetCurrentContext();
     CGRect graphSize = [self bounds];
     
-    if ([[aircraft envelope] count] >=3) {  //dont draw anything if not enough points
+    if ([envelope count] >=3) {  //dont draw anything if not enough points
         
         //draw some grid lines
         CGContextSetLineWidth(cgx, 1);
         CGContextSetStrokeColorWithColor(cgx, [[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1]CGColor]);
+    
         
-        const int numXgridlines = 5, numYgridlines = 10;
-        
-        for (float i=0; i<numXgridlines; i++){
-            CGContextMoveToPoint(cgx, 0, i*(graphSize.size.height/numXgridlines));
-            CGContextAddLineToPoint(cgx, graphSize.size.width, i*(graphSize.size.height/numXgridlines));
+        for (float i=0; i<NUM_X_GRID_LINES; i++){
+            CGContextMoveToPoint(cgx, 0, i*(graphSize.size.height/NUM_X_GRID_LINES));
+            CGContextAddLineToPoint(cgx, graphSize.size.width, i*(graphSize.size.height/NUM_X_GRID_LINES));
         }
         
-        for (int i=0; i<numYgridlines; i++) {
-            CGContextMoveToPoint(cgx,i*graphSize.size.width/numYgridlines, 0);
-            CGContextAddLineToPoint(cgx, i*graphSize.size.width/numYgridlines, graphSize.size.height);
+        for (int i=0; i<NUM_Y_GRID_LINES; i++) {
+            CGContextMoveToPoint(cgx,i*graphSize.size.width/NUM_Y_GRID_LINES, 0);
+            CGContextAddLineToPoint(cgx, i*graphSize.size.width/NUM_Y_GRID_LINES, graphSize.size.height);
      
         }
         
@@ -52,18 +57,19 @@
         CGContextMoveToPoint(cgx, 0, graphSize.size.height);
         CGContextAddLineToPoint(cgx, graphSize.size.width, graphSize.size.height);
         CGContextAddLineToPoint(cgx, graphSize.size.width, 0);
-        
         CGContextDrawPath(cgx, kCGPathStroke);
         
-        CGContextBeginPath(cgx);
-        CGContextSetLineWidth(cgx, 2.0);
-        CGContextSetStrokeColor (cgx, CGColorGetComponents([[UIColor redColor]CGColor]));
         
-        CGContextMoveToPoint(cgx, 0, graphSize.size.height);     // start in the bottom left hand corner
+        CGContextSetLineWidth(cgx, ENVELOPE_LINE_WIDTH);
+        CGContextSetStrokeColor (cgx, CGColorGetComponents([[UIColor ENVELOPE_LINE_COLOR]CGColor]));
+        
+        //create a resuable path for the envelope (we'll use it both to draw and to calc whether the X is inside)
+        CGMutablePathRef envelopePath = CGPathCreateMutable();
+        CGPathMoveToPoint(envelopePath, NULL, 0, graphSize.size.height);     // start in the bottom left hand corner
         
         float maxArm = 0, maxWeight = 0, minArm = 999999, minWeight = 999999;
         
-        for (EnvelopePoint *ep in [aircraft envelope]) {        //first capture the highest values
+        for (EnvelopePoint *ep in envelope) {        //first capture the highest values
             maxArm = MAX(maxArm, [ep armAsFloat]);
             minArm = MIN(minArm, [ep armAsFloat]);
             maxWeight = MAX(maxWeight, [ep weightAsFloat]);
@@ -95,13 +101,17 @@
         
         
 
-        for (EnvelopePoint *ep in [aircraft envelope]) {        //cycle through the points now add the points
-            CGContextAddLineToPoint(cgx, ([ep armAsFloat]-minArm)*hScale, (maxWeight-[ep weightAsFloat])*vScale);   //scale the height to the mgw
+        for (EnvelopePoint *ep in envelope) {        //cycle through the points now add the points
+            CGPathAddLineToPoint(envelopePath, NULL,([ep armAsFloat]-minArm)*hScale, (maxWeight-[ep weightAsFloat])*vScale);   //scale the height to the mgw
         }
           //and draw
+        CGContextAddPath(cgx, envelopePath);
         CGContextDrawPath(cgx,kCGPathStroke);
         
         if ([self currentLoading]) {
+            
+            //grab a copy of the path, closing it first
+            CGPathCloseSubpath(envelopePath);
             
             float crossX = ([[self currentLoading] armAsFloat]-minArm)*hScale;
             float crossY = (maxWeight - [[self currentLoading] weightAsFloat])*vScale;
@@ -110,9 +120,13 @@
             
             float crossSize = 5;
             CGContextSetLineWidth(cgx, 3.0);
-            CGContextSetStrokeColor (cgx, ([[aircraft isAircraftInBalance]result]==[BalanceResult resultForCondition:WBinBalanceCondition]) ?
-                                           CGColorGetComponents([[UIColor greenColor]CGColor]) :
-                                           CGColorGetComponents([[UIColor redColor]CGColor]));
+            
+            //evaluate if the cross is inside the envelope
+            BOOL crossIsInside  = CGPathContainsPoint(envelopePath, NULL, CGPointMake(crossX, crossY), NO);
+            CGContextSetStrokeColor (cgx, (crossIsInside) ? CGColorGetComponents([[UIColor greenColor]CGColor]) :
+                                                            CGColorGetComponents([[UIColor redColor]CGColor]));
+            
+            
             // draw an X
             CGContextMoveToPoint(cgx, crossX-crossSize, crossY-crossSize);
             CGContextAddLineToPoint(cgx,crossX+crossSize, crossY+crossSize);

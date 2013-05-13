@@ -18,7 +18,14 @@
 }
 
 
-
+-(id)copyWithZone:(NSZone *)zone
+{
+    EnvelopePoint *new = [[EnvelopePoint allocWithZone:zone]init];
+    new.weight = [weight copy];
+    new.arm = [arm copy];
+    return new;
+    
+}
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {

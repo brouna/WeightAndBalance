@@ -29,6 +29,12 @@
 		8441D94C172C607A00B8D86E /* EnvelopePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441D948172C607A00B8D86E /* EnvelopePoint.m */; };
 		8441D954172C61D500B8D86E /* AircraftStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441D953172C61D400B8D86E /* AircraftStore.m */; };
 		8441D95A172C757000B8D86E /* AircraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441D958172C713B00B8D86E /* AircraftViewController.m */; };
+		84495710173ECEE7008225EE /* AircraftType.m in Sources */ = {isa = PBXBuildFile; fileRef = 8449570F173ECEE7008225EE /* AircraftType.m */; };
+		84495713173ED358008225EE /* TypeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 84495712173ED358008225EE /* TypeStore.m */; };
+		84495717173EDD74008225EE /* WBTypeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84495715173EDD74008225EE /* WBTypeSelectViewController.m */; };
+		84495718173EDD74008225EE /* WBTypeSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84495716173EDD74008225EE /* WBTypeSelectViewController.xib */; };
+		8449571C173EDDA5008225EE /* WBTypeEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8449571A173EDDA5008225EE /* WBTypeEditViewController.m */; };
+		8449571D173EDDA5008225EE /* WBTypeEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8449571B173EDDA5008225EE /* WBTypeEditViewController.xib */; };
 		84513F78173EA0F400974CAA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84513F77173EA0F400974CAA /* MessageUI.framework */; };
 		848B93731732B376003C5D1E /* BalanceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B93721732B376003C5D1E /* BalanceResult.m */; };
 		84AAEB981732D2DD00514054 /* EnvelopeGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AAEB971732D2DD00514054 /* EnvelopeGraph.m */; };
@@ -79,6 +85,16 @@
 		8441D953172C61D400B8D86E /* AircraftStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AircraftStore.m; path = WeightandBalance/AircraftStore.m; sourceTree = "<group>"; };
 		8441D957172C713B00B8D86E /* AircraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AircraftViewController.h; sourceTree = "<group>"; };
 		8441D958172C713B00B8D86E /* AircraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AircraftViewController.m; sourceTree = "<group>"; };
+		8449570E173ECEE7008225EE /* AircraftType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AircraftType.h; path = WeightandBalance/AircraftType.h; sourceTree = "<group>"; };
+		8449570F173ECEE7008225EE /* AircraftType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AircraftType.m; path = WeightandBalance/AircraftType.m; sourceTree = "<group>"; };
+		84495711173ED358008225EE /* TypeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeStore.h; path = WeightandBalance/TypeStore.h; sourceTree = "<group>"; };
+		84495712173ED358008225EE /* TypeStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TypeStore.m; path = WeightandBalance/TypeStore.m; sourceTree = "<group>"; };
+		84495714173EDD74008225EE /* WBTypeSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBTypeSelectViewController.h; sourceTree = "<group>"; };
+		84495715173EDD74008225EE /* WBTypeSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTypeSelectViewController.m; sourceTree = "<group>"; };
+		84495716173EDD74008225EE /* WBTypeSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBTypeSelectViewController.xib; sourceTree = "<group>"; };
+		84495719173EDDA4008225EE /* WBTypeEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBTypeEditViewController.h; sourceTree = "<group>"; };
+		8449571A173EDDA5008225EE /* WBTypeEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTypeEditViewController.m; sourceTree = "<group>"; };
+		8449571B173EDDA5008225EE /* WBTypeEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBTypeEditViewController.xib; sourceTree = "<group>"; };
 		84513F77173EA0F400974CAA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		848B93711732B376003C5D1E /* BalanceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BalanceResult.h; path = WeightandBalance/BalanceResult.h; sourceTree = "<group>"; };
 		848B93721732B376003C5D1E /* BalanceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceResult.m; path = WeightandBalance/BalanceResult.m; sourceTree = "<group>"; };
@@ -154,6 +170,12 @@
 				84FF71F517307474000CC761 /* EnvelopeCell.xib */,
 				84FF71F2173071E1000CC761 /* EnvelopeCell.h */,
 				84FF71F3173071E1000CC761 /* EnvelopeCell.m */,
+				84495714173EDD74008225EE /* WBTypeSelectViewController.h */,
+				84495715173EDD74008225EE /* WBTypeSelectViewController.m */,
+				84495716173EDD74008225EE /* WBTypeSelectViewController.xib */,
+				84495719173EDDA4008225EE /* WBTypeEditViewController.h */,
+				8449571A173EDDA5008225EE /* WBTypeEditViewController.m */,
+				8449571B173EDDA5008225EE /* WBTypeEditViewController.xib */,
 				840F654217308A3100F877B9 /* EnvelopeViewController.xib */,
 				84FF71EF173071AB000CC761 /* EnvelopeViewController.h */,
 				84FF71F0173071AB000CC761 /* EnvelopeViewController.m */,
@@ -201,6 +223,10 @@
 				848B93721732B376003C5D1E /* BalanceResult.m */,
 				8441D945172C607A00B8D86E /* Datum.h */,
 				8441D946172C607A00B8D86E /* Datum.m */,
+				8449570E173ECEE7008225EE /* AircraftType.h */,
+				8449570F173ECEE7008225EE /* AircraftType.m */,
+				84495711173ED358008225EE /* TypeStore.h */,
+				84495712173ED358008225EE /* TypeStore.m */,
 				8441D952172C61D400B8D86E /* AircraftStore.h */,
 				8441D953172C61D400B8D86E /* AircraftStore.m */,
 				8441D947172C607A00B8D86E /* EnvelopePoint.h */,
@@ -279,6 +305,8 @@
 				840F654317308A3100F877B9 /* EnvelopeViewController.xib in Resources */,
 				84BD56801730B32B006CB8AB /* planeAppIcon.png in Resources */,
 				84BD56821730B335006CB8AB /* planeAppIcon@2x.png in Resources */,
+				84495718173EDD74008225EE /* WBTypeSelectViewController.xib in Resources */,
+				8449571D173EDDA5008225EE /* WBTypeEditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +331,10 @@
 				84FF71F1173071AB000CC761 /* EnvelopeViewController.m in Sources */,
 				84FF71F4173071E1000CC761 /* EnvelopeCell.m in Sources */,
 				848B93731732B376003C5D1E /* BalanceResult.m in Sources */,
+				84495710173ECEE7008225EE /* AircraftType.m in Sources */,
+				84495713173ED358008225EE /* TypeStore.m in Sources */,
+				84495717173EDD74008225EE /* WBTypeSelectViewController.m in Sources */,
+				8449571C173EDDA5008225EE /* WBTypeEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

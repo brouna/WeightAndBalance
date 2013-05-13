@@ -8,34 +8,28 @@
 
 #import "AircraftType.h"
 #import "Datum.h"
+#import "EnvelopePoint.h"
 
 @implementation AircraftType
 
-@synthesize typeName;
-@synthesize basicEmptyMoment, fuelMoment;
-@synthesize maxGross, maxFuel, maxBaggage, fuelBurnRate;
-@synthesize frontArm, backArm, baggageArm;
+
 
 -(id) initWithName: (NSString *)newName
 {
     self = [super init];
     if (self)
     {
-        [self setTypeName:newName];
-        basicEmptyMoment  = [[Datum alloc] initWithName:@"Basic Empty"];
+        _typeName = newName;
+        _envelope = [[NSMutableArray alloc]init]; //will hold the envelope points
+        [_envelope addObject:[[EnvelopePoint alloc]init]]; //add a blank envelope point
         
-        fuelMoment = [[Datum alloc] initWithName:@"Fuel"];
-        maxGross = [NSNumber numberWithFloat:0];
-        maxFuel = [NSNumber numberWithFloat:0];
-        maxBaggage = [NSNumber numberWithFloat:0];
-        fuelBurnRate = [NSNumber numberWithFloat:0];
-        frontArm = [NSNumber numberWithFloat:0];
-        backArm = [NSNumber numberWithFloat:0];
-        baggageArm = [NSNumber numberWithFloat:0];
-    
-    
-        self.envelope = [[NSMutableArray alloc]init]; //will hold the envelope points
-        
+        _datums = [[NSMutableDictionary alloc]initWithObjects:@[
+                           [[Datum alloc]initWithName:WBBasicEmptyDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0],
+                           [[Datum alloc]initWithName:WBFuelDatum Quantity:@0 WeightPerQuantity: FUEL_LBS_PER_GALLON andArm:@0],
+                           [[Datum alloc]initWithName:WBTKSDatum Quantity:@0 WeightPerQuantity:TKS_LBS_PER_GALLON andArm:@0],
+                           [[Datum alloc]initWithName:WBOxygenDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0],
+                           [[Datum alloc]initWithName:WBBaggageDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0]]
+                        forKeys:@[WBBasicEmptyDatum,WBFuelDatum,WBTKSDatum, WBOxygenDatum, WBBaggageDatum]];
     }
     return self;
 }
@@ -45,5 +39,43 @@
     self= [self initWithName:@""];
     return self;
 }
+
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:_typeName forKey:@"typeName"];
+    [aCoder encodeObject:_maxGross forKey:@"maxGross"];
+    [aCoder encodeObject:_maxFuel forKey:@"maxFuel"];
+    [aCoder encodeObject:_maxBaggage forKey:@"maxBaggage"];
+    [aCoder encodeObject:_frontArm forKey:@"frontArm"];
+    [aCoder encodeObject:_backArm forKey:@"backArm"];
+    [aCoder encodeObject:_maxTKS forKey:@"MaxTKS"];
+    [aCoder encodeObject:_maxO2 forKey:@"MaxO2"];
+    [aCoder encodeObject:_envelope forKey:@"envelope"];
+    [aCoder encodeObject:_datums forKey:@"datums"];
+    
+    
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self) {
+        _typeName = [aDecoder decodeObjectForKey:@"typeName"];
+        _maxGross =[aDecoder decodeObjectForKey:@"maxGross"];
+        _maxFuel =[aDecoder decodeObjectForKey:@"maxFuel"];
+        _maxBaggage =[aDecoder decodeObjectForKey:@"maxBaggage"];
+        _frontArm =[aDecoder decodeObjectForKey:@"frontArm"];
+        _backArm =[aDecoder decodeObjectForKey:@"backArm"];
+        _maxTKS=[aDecoder decodeObjectForKey:@"MaxTKS"];
+        _maxO2=[aDecoder decodeObjectForKey:@"MaxO2"];
+        _envelope=[aDecoder decodeObjectForKey:@"envelope"];
+        _datums=[aDecoder decodeObjectForKey:@"datums"];
+    }
+    return self;
+}
+
+
 
 @end

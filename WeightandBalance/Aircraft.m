@@ -8,10 +8,14 @@
 
 #import "Aircraft.h"
 #import "Datum.h"
+#import "AircraftType.h"
 #import "EnvelopePoint.h"
 #import "BalanceResult.h"
+#import "TypeStore.h"
 
 @implementation Aircraft
+
+
 @synthesize tailNumber, typeName;
 @synthesize maxGross, maxFuel, maxBaggage, maxO2, maxTKS;
 @synthesize frontArm, backArm;
@@ -19,32 +23,15 @@
 @synthesize envelope;
 @synthesize datums;
 
-#define FUEL_LBS_PER_GALLON @6.0
-#define TKS_LBS_PER_GALLON  @9.1
-
 
 
 - (id)init
 {
     self = [super init];
     if (self) {
-
-        Datum *bew = [[Datum alloc] initWithName:WBBasicEmptyDatum Quantity:@1.0 WeightPerQuantity:@1.0 andArm:@0.0];
-        Datum *fuel = [[Datum alloc] initWithName:WBFuelDatum Quantity:@0.0 WeightPerQuantity:FUEL_LBS_PER_GALLON andArm:@0.0];
-        Datum *tks =  [[Datum alloc] initWithName:WBTKSDatum Quantity:@0.0 WeightPerQuantity:TKS_LBS_PER_GALLON andArm:@0.0];
-        Datum *o2 =  [[Datum alloc] initWithName:WBOxygenDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
-        Datum *bags = [[Datum alloc]initWithName:WBBaggageDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
-        
-        datums = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                  bew,  WBBasicEmptyDatum,
-                  fuel, WBFuelDatum       ,
-                  tks,  WBTKSDatum        ,
-                  o2,   WBOxygenDatum     ,
-                  bags, WBBaggageDatum    , nil];
-        
-        envelope = [[NSMutableArray alloc]init];
-        [envelope addObject:[[EnvelopePoint alloc]init]];
-                  
+/*
+ 
+ */
     }
     return self;
 }
@@ -56,6 +43,43 @@
     {
         typeName = myType;
         tailNumber = myTail;
+        
+        // if an aircraftype exists, copy all its data, otherwise create a blank one
+        for (AircraftType *at in [[TypeStore defaultStore]allTypes]) {
+            if (at.typeName == myType){  //found a match
+                maxGross = [at.maxGross copy];
+                maxFuel = [at.maxFuel copy];
+                maxBaggage = [at.maxBaggage copy];
+                maxTKS = [at.maxTKS copy];
+                maxO2 = [at.maxO2 copy];
+                frontArm = [at.frontArm copy];
+                backArm = [at.backArm copy];
+                datums = [[NSMutableDictionary  alloc] initWithDictionary:at.datums copyItems:YES ];  //make sure we create a deep copy of the datums and envelope
+                envelope = [[NSMutableArray alloc] initWithArray:at.envelope copyItems:YES];
+                
+                
+            } else          //not found, create a blank one
+            {
+                Datum *bew = [[Datum alloc] initWithName:WBBasicEmptyDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
+                Datum *fuel = [[Datum alloc] initWithName:WBFuelDatum Quantity:@0.0 WeightPerQuantity:FUEL_LBS_PER_GALLON andArm:@0.0];
+                Datum *tks =  [[Datum alloc] initWithName:WBTKSDatum Quantity:@0.0 WeightPerQuantity:TKS_LBS_PER_GALLON andArm:@0.0];
+                Datum *o2 =  [[Datum alloc] initWithName:WBOxygenDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
+                Datum *bags = [[Datum alloc]initWithName:WBBaggageDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
+                
+                datums = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                          bew,  WBBasicEmptyDatum,
+                          fuel, WBFuelDatum       ,
+                          tks,  WBTKSDatum        ,
+                          o2,   WBOxygenDatum     ,
+                          bags, WBBaggageDatum    , nil];
+                
+                envelope = [[NSMutableArray alloc]init];
+                [envelope addObject:[[EnvelopePoint alloc]init]];
+            }
+        }
+        
+        
+        
     }
     return self;
 }

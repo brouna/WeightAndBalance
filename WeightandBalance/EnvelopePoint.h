@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EnvelopePoint : NSObject  <NSCoding>
+@interface EnvelopePoint : NSObject  <NSCoding, NSCopying>
 
 @property NSNumber *weight, *arm;
 

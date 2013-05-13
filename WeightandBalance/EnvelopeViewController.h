@@ -13,7 +13,8 @@
 
 @interface EnvelopeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) Aircraft *aircraft;
+@property (strong, nonatomic) NSMutableArray *envelope;
+@property (strong, nonatomic) NSNumber *maxGross;
 
 @property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
 @property (strong, nonatomic) IBOutlet UITableView *envTableView;

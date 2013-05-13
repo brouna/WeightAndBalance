@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Aircraft.h"
 
-@interface AircraftViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate, UIActionSheetDelegate>
+@interface AircraftViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic)    Aircraft *aircraft;
 @property BOOL createNew;
