@@ -13,6 +13,7 @@
 		843B1DFD172DCC2C0056DEEB /* AircraftLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B1DFC172DCC2C0056DEEB /* AircraftLoadViewController.m */; };
 		843B1E03172DE72F0056DEEB /* AircraftLoadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843B1E02172DE72F0056DEEB /* AircraftLoadViewController.xib */; };
 		843B1E05172DE7490056DEEB /* AircraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843B1E04172DE7490056DEEB /* AircraftViewController.xib */; };
+		843D6BC21742C39100758DDB /* initialtypes.v2.archive in Resources */ = {isa = PBXBuildFile; fileRef = 843D6BC11742C39100758DDB /* initialtypes.v2.archive */; };
 		8441D91A172C5FF500B8D86E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8441D919172C5FF500B8D86E /* UIKit.framework */; };
 		8441D91C172C5FF500B8D86E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8441D91B172C5FF500B8D86E /* Foundation.framework */; };
 		8441D91E172C5FF500B8D86E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8441D91D172C5FF500B8D86E /* CoreGraphics.framework */; };
@@ -59,6 +60,7 @@
 		843B1DFC172DCC2C0056DEEB /* AircraftLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AircraftLoadViewController.m; sourceTree = "<group>"; };
 		843B1E02172DE72F0056DEEB /* AircraftLoadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AircraftLoadViewController.xib; sourceTree = "<group>"; };
 		843B1E04172DE7490056DEEB /* AircraftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AircraftViewController.xib; sourceTree = "<group>"; };
+		843D6BC11742C39100758DDB /* initialtypes.v2.archive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = initialtypes.v2.archive; sourceTree = "<group>"; };
 		8441D916172C5FF500B8D86E /* WeightandBalance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeightandBalance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8441D919172C5FF500B8D86E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8441D91B172C5FF500B8D86E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -196,6 +198,7 @@
 		8441D920172C5FF600B8D86E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				843D6BC11742C39100758DDB /* initialtypes.v2.archive */,
 				84BD56811730B335006CB8AB /* planeAppIcon@2x.png */,
 				84BD567F1730B32B006CB8AB /* planeAppIcon.png */,
 				84E19E07172EB93600BC6D21 /* editplane30x30.png */,
@@ -307,6 +310,7 @@
 				84BD56821730B335006CB8AB /* planeAppIcon@2x.png in Resources */,
 				84495718173EDD74008225EE /* WBTypeSelectViewController.xib in Resources */,
 				8449571D173EDDA5008225EE /* WBTypeEditViewController.xib in Resources */,
+				843D6BC21742C39100758DDB /* initialtypes.v2.archive in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

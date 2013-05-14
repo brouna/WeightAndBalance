@@ -23,5 +23,6 @@
 -(void) moveAircraftTypeAtIndex:(int)from
                               To:(int)to;
 -(BOOL) saveChanges;
+-(NSString *)itemArchivePath;   // returns the path to the type archive file
 
 @end

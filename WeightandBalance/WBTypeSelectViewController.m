@@ -125,12 +125,15 @@
         [[TypeStore defaultStore]addType:t];
     }   
 }
-/*
-// Override to support rearranging the table view.
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    
+    [[TypeStore defaultStore]moveAircraftTypeAtIndex:fromIndexPath.row To:toIndexPath.row];
+    
+    
 }
-*/
+
 
 /*
 // Override to support conditional rearranging of the table view.

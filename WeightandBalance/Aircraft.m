@@ -43,6 +43,7 @@
     {
         typeName = myType;
         tailNumber = myTail;
+        BOOL foundTypeMatch = NO;
         
         // if an aircraftype exists, copy all its data, otherwise create a blank one
         for (AircraftType *at in [[TypeStore defaultStore]allTypes]) {
@@ -56,30 +57,27 @@
                 backArm = [at.backArm copy];
                 datums = [[NSMutableDictionary  alloc] initWithDictionary:at.datums copyItems:YES ];  //make sure we create a deep copy of the datums and envelope
                 envelope = [[NSMutableArray alloc] initWithArray:at.envelope copyItems:YES];
-                
-                
-            } else          //not found, create a blank one
-            {
-                Datum *bew = [[Datum alloc] initWithName:WBBasicEmptyDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
-                Datum *fuel = [[Datum alloc] initWithName:WBFuelDatum Quantity:@0.0 WeightPerQuantity:FUEL_LBS_PER_GALLON andArm:@0.0];
-                Datum *tks =  [[Datum alloc] initWithName:WBTKSDatum Quantity:@0.0 WeightPerQuantity:TKS_LBS_PER_GALLON andArm:@0.0];
-                Datum *o2 =  [[Datum alloc] initWithName:WBOxygenDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
-                Datum *bags = [[Datum alloc]initWithName:WBBaggageDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
-                
-                datums = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                          bew,  WBBasicEmptyDatum,
-                          fuel, WBFuelDatum       ,
-                          tks,  WBTKSDatum        ,
-                          o2,   WBOxygenDatum     ,
-                          bags, WBBaggageDatum    , nil];
-                
-                envelope = [[NSMutableArray alloc]init];
-                [envelope addObject:[[EnvelopePoint alloc]init]];
+                foundTypeMatch = YES;
             }
         }
-        
-        
-        
+        if (!foundTypeMatch) {
+            Datum *bew = [[Datum alloc] initWithName:WBBasicEmptyDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
+            Datum *fuel = [[Datum alloc] initWithName:WBFuelDatum Quantity:@0.0 WeightPerQuantity:FUEL_LBS_PER_GALLON andArm:@0.0];
+            Datum *tks =  [[Datum alloc] initWithName:WBTKSDatum Quantity:@0.0 WeightPerQuantity:TKS_LBS_PER_GALLON andArm:@0.0];
+            Datum *o2 =  [[Datum alloc] initWithName:WBOxygenDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
+            Datum *bags = [[Datum alloc]initWithName:WBBaggageDatum Quantity:@0.0 WeightPerQuantity:@1.0 andArm:@0.0];
+            
+            datums = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                      bew,  WBBasicEmptyDatum,
+                      fuel, WBFuelDatum       ,
+                      tks,  WBTKSDatum        ,
+                      o2,   WBOxygenDatum     ,
+                      bags, WBBaggageDatum    , nil];
+            
+            envelope = [[NSMutableArray alloc]init];
+            [envelope addObject:[[EnvelopePoint alloc]init]];
+        }
+    
     }
     return self;
 }

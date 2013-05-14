@@ -14,6 +14,8 @@
 #import "Aircraft.h"
 #import "Datum.h"
 
+#define TYPES_LIBRARY_FILE_NAME    @"initialtypes.v2.archive"
+
 @implementation WBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -21,6 +23,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
+    
+    [self loadInitialTypes];   
+    
     
     WBMasterViewController *masterViewController = [[WBMasterViewController alloc] initWithNibName:@"WBMasterViewController" bundle:nil];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
@@ -66,6 +71,19 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void) loadInitialTypes
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    NSString *txtPath = [[TypeStore defaultStore] itemArchivePath];
+    
+    if ([fileManager fileExistsAtPath:txtPath] == NO) {
+        NSString *resourcePath = [[NSBundle mainBundle] pathForResource:TYPES_LIBRARY_FILE_NAME ofType:nil];
+        if (resourcePath)
+            [fileManager copyItemAtPath:resourcePath toPath:txtPath error:&error];
+    }
 }
 
 @end

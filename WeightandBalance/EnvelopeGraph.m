@@ -14,7 +14,10 @@
 #define ENVELOPE_LINE_COLOR    redColor
 #define NUM_X_GRID_LINES   5
 #define NUM_Y_GRID_LINES   10
-
+#define FRAME_SIZE_IN_POINTS 10         //gap bewteen the edge of the view and the actual graph - the axis labels and scale live here
+#define LABEL_SIZE_IN_POINTS 8          // font size of the axis labels
+#define Y_AXIS_LABEL @"Weight (lb)"     
+#define X_AXIS_LABEL @"Arm (in)"
 
 @implementation EnvelopeGraph
 @synthesize envelope, currentLoading;
@@ -33,7 +36,7 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef cgx = UIGraphicsGetCurrentContext();
-    CGRect graphSize = [self bounds];
+    CGRect graphRect = CGRectMake(FRAME_SIZE_IN_POINTS, FRAME_SIZE_IN_POINTS, self.bounds.size.width-(2*FRAME_SIZE_IN_POINTS), self.bounds.size.height-(2*FRAME_SIZE_IN_POINTS));
     
     if ([envelope count] >=3) {  //dont draw anything if not enough points
         
@@ -43,20 +46,20 @@
     
         
         for (float i=0; i<NUM_X_GRID_LINES; i++){
-            CGContextMoveToPoint(cgx, 0, i*(graphSize.size.height/NUM_X_GRID_LINES));
-            CGContextAddLineToPoint(cgx, graphSize.size.width, i*(graphSize.size.height/NUM_X_GRID_LINES));
+            CGContextMoveToPoint(cgx, graphRect.origin.x, i*(graphRect.size.height/NUM_X_GRID_LINES)+graphRect.origin.y);
+            CGContextAddLineToPoint(cgx, graphRect.origin.x+graphRect.size.width , i*(graphRect.size.height/NUM_X_GRID_LINES)+graphRect.origin.y);
         }
         
         for (int i=0; i<NUM_Y_GRID_LINES; i++) {
-            CGContextMoveToPoint(cgx,i*graphSize.size.width/NUM_Y_GRID_LINES, 0);
-            CGContextAddLineToPoint(cgx, i*graphSize.size.width/NUM_Y_GRID_LINES, graphSize.size.height);
+            CGContextMoveToPoint(cgx,i*graphRect.size.width/NUM_Y_GRID_LINES+graphRect.origin.x, graphRect.origin.y);
+            CGContextAddLineToPoint(cgx, i*graphRect.size.width/NUM_Y_GRID_LINES+graphRect.origin.x, graphRect.origin.y+graphRect.size.height);
      
         }
         
         //complete the border
-        CGContextMoveToPoint(cgx, 0, graphSize.size.height);
-        CGContextAddLineToPoint(cgx, graphSize.size.width, graphSize.size.height);
-        CGContextAddLineToPoint(cgx, graphSize.size.width, 0);
+        CGContextMoveToPoint(cgx, graphRect.origin.x, graphRect.origin.y+graphRect.size.height);
+        CGContextAddLineToPoint(cgx, graphRect.origin.x+graphRect.size.width, graphRect.origin.y+graphRect.size.height);
+        CGContextAddLineToPoint(cgx, graphRect.origin.x+graphRect.size.width, graphRect.origin.y);
         CGContextDrawPath(cgx, kCGPathStroke);
         
         
@@ -65,7 +68,6 @@
         
         //create a resuable path for the envelope (we'll use it both to draw and to calc whether the X is inside)
         CGMutablePathRef envelopePath = CGPathCreateMutable();
-        CGPathMoveToPoint(envelopePath, NULL, 0, graphSize.size.height);     // start in the bottom left hand corner
         
         float maxArm = 0, maxWeight = 0, minArm = 999999, minWeight = 999999;
         
@@ -85,24 +87,51 @@
         }
         
         
+        
+        
         //add some numbers to the picture
-        [[NSString stringWithFormat:@"%1.0f",maxWeight] drawAtPoint:CGPointMake(1, 0) withFont:[UIFont systemFontOfSize:8]];
+    
+        CGSize maxArmSize = [[NSString stringWithFormat:@"%1.0f",maxArm] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        CGSize maxWeightSize = [[NSString stringWithFormat:@"%1.0f",maxWeight] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        CGSize yLabelSize = [[NSString stringWithFormat:Y_AXIS_LABEL] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        CGSize xLabelSize = [[NSString stringWithFormat:X_AXIS_LABEL] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
         
-        [[NSString stringWithFormat:@"%1.0f",minWeight] drawAtPoint:CGPointMake(1, graphSize.size.height-15) withFont:[UIFont systemFontOfSize:8]];
         
-        [[NSString stringWithFormat:@"%1.0f",minArm] drawAtPoint:CGPointMake(20, graphSize.size.height - 10) withFont:[UIFont italicSystemFontOfSize:8]];
-        
-        CGSize maxArmSize = [[NSString stringWithFormat:@"%1.0f",maxArm] sizeWithFont:[UIFont italicSystemFontOfSize:8]];
-        
-        [[NSString stringWithFormat:@"%1.0f",maxArm] drawAtPoint:CGPointMake(graphSize.size.width-maxArmSize.width, graphSize.size.height - 10) withFont:[UIFont italicSystemFontOfSize:8]];
-       
-        float hScale = (graphSize.size.width/(maxArm - minArm)) ;
-        float vScale = (graphSize.size.height)/(maxWeight - minWeight);
-        
+        [[NSString stringWithFormat:@"%1.0f",minArm] drawAtPoint:CGPointMake(FRAME_SIZE_IN_POINTS, self.bounds.size.height- FRAME_SIZE_IN_POINTS) withFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
+    
+        [[NSString stringWithFormat:@"%1.0f",maxArm] drawAtPoint:CGPointMake(self.bounds.size.width-maxArmSize.width-FRAME_SIZE_IN_POINTS, self.bounds.size.height - FRAME_SIZE_IN_POINTS) withFont:[UIFont italicSystemFontOfSize:8]];
         
 
-        for (EnvelopePoint *ep in envelope) {        //cycle through the points now add the points
-            CGPathAddLineToPoint(envelopePath, NULL,([ep armAsFloat]-minArm)*hScale, (maxWeight-[ep weightAsFloat])*vScale);   //scale the height to the mgw
+        
+        [self drawVerticallyAtPoint:[NSString stringWithFormat:@"%1.0f",maxWeight]
+                        withContext:cgx
+                            atPoint:CGPointMake(1, FRAME_SIZE_IN_POINTS+maxWeightSize.width)
+                           withFont:[UIFont systemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        
+        [self drawVerticallyAtPoint:[NSString stringWithFormat:@"%1.0f",minWeight]
+                        withContext:cgx
+                            atPoint:CGPointMake(1, self.bounds.size.height-FRAME_SIZE_IN_POINTS)
+                           withFont:[UIFont systemFontOfSize:LABEL_SIZE_IN_POINTS]];
+
+        //label the axes
+        
+        [self drawVerticallyAtPoint:Y_AXIS_LABEL withContext:cgx atPoint:CGPointMake(1, (graphRect.size.height+yLabelSize.width)/2+graphRect.origin.y) withFont:[UIFont systemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        
+        [X_AXIS_LABEL drawAtPoint:CGPointMake(graphRect.origin.x+(graphRect.size.width-xLabelSize.width)/2 , self.bounds.size.height-FRAME_SIZE_IN_POINTS) withFont:[UIFont systemFontOfSize:LABEL_SIZE_IN_POINTS]];
+       
+        float hScale = (graphRect.size.width/(maxArm - minArm)) ;
+        float vScale = (graphRect.size.height)/(maxWeight - minWeight);
+        
+        //move to the first envelope point
+        CGPathMoveToPoint(envelopePath, NULL,
+                          graphRect.origin.x+(([envelope[0] armAsFloat]-minArm)*hScale),
+                          graphRect.origin.y+(maxWeight-[envelope[0] weightAsFloat])*vScale);
+        
+    
+        for (EnvelopePoint *ep in envelope) {        //cycle through the points
+            CGPathAddLineToPoint(envelopePath, NULL,
+                                 graphRect.origin.x+(([ep armAsFloat]-minArm)*hScale),
+                                 graphRect.origin.y+(maxWeight-[ep weightAsFloat])*vScale);
         }
           //and draw
         CGContextAddPath(cgx, envelopePath);
@@ -113,8 +142,8 @@
             //grab a copy of the path, closing it first
             CGPathCloseSubpath(envelopePath);
             
-            float crossX = ([[self currentLoading] armAsFloat]-minArm)*hScale;
-            float crossY = (maxWeight - [[self currentLoading] weightAsFloat])*vScale;
+            float crossX = graphRect.origin.x + (([[self currentLoading] armAsFloat]-minArm)*hScale);
+            float crossY = graphRect.origin.y + ((maxWeight - [[self currentLoading] weightAsFloat])*vScale);
             
             CGContextMoveToPoint(cgx, crossX, crossY);
             
@@ -135,6 +164,24 @@
             CGContextDrawPath(cgx, kCGPathStroke);
         }
     }
-    
 }
+
+    
+- (void)drawVerticallyAtPoint:(NSString *)string
+                  withContext:(CGContextRef)context
+                      atPoint:(CGPoint)point
+                     withFont:(UIFont *)font
+
+    {
+                CGContextSaveGState(context);
+        CGContextTranslateCTM(context, point.x, point.y);
+        
+        CGAffineTransform textTransform = CGAffineTransformMakeRotation(-M_PI_2);
+        CGContextConcatCTM(context, textTransform);
+        CGContextTranslateCTM(context, -point.x, -point.y);
+        [string drawAtPoint:point withFont:font];
+        CGContextRestoreGState(context);
+    }
+    
+
 @end
