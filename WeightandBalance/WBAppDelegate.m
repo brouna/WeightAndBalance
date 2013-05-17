@@ -13,8 +13,8 @@
 #import "TypeStore.h"
 #import "Aircraft.h"
 #import "Datum.h"
+#import "WBGlobalConstants.h"
 
-#define TYPES_LIBRARY_FILE_NAME    @"initialtypes.v2.archive"
 
 @implementation WBAppDelegate
 
@@ -77,10 +77,13 @@
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
-    NSString *txtPath = [[TypeStore defaultStore] itemArchivePath];
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                       NSUserDomainMask, YES);
+    NSString * documentDirectory = documentDirectories[0];
+    NSString *txtPath =  [documentDirectory stringByAppendingPathComponent:TYPES_LIBRARY_FILE_NAME];
     
     if ([fileManager fileExistsAtPath:txtPath] == NO) {
-        NSString *resourcePath = [[NSBundle mainBundle] pathForResource:TYPES_LIBRARY_FILE_NAME ofType:nil];
+        NSString *resourcePath = [[NSBundle mainBundle] pathForResource:TYPES_LIBRARY_RESOURCE_NAME ofType:nil];
         if (resourcePath)
             [fileManager copyItemAtPath:resourcePath toPath:txtPath error:&error];
     }

@@ -7,10 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#define FUEL_LBS_PER_GALLON @6.0
-#define TKS_LBS_PER_GALLON  @9.1
-
+#import "WBGlobalConstants.h"
 
 @class Datum;
 @class NSString;

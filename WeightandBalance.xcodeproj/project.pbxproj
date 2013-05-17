@@ -104,6 +104,7 @@
 		84AAEB971732D2DD00514054 /* EnvelopeGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvelopeGraph.m; path = WeightandBalance/EnvelopeGraph.m; sourceTree = "<group>"; };
 		84BD567F1730B32B006CB8AB /* planeAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planeAppIcon.png; path = ../planeAppIcon.png; sourceTree = "<group>"; };
 		84BD56811730B335006CB8AB /* planeAppIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "planeAppIcon@2x.png"; path = "../planeAppIcon@2x.png"; sourceTree = "<group>"; };
+		84C104DA1743B62D00D3915F /* WBGlobalConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGlobalConstants.h; sourceTree = "<group>"; };
 		84E19E01172EADA400BC6D21 /* plane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane.png; sourceTree = "<group>"; };
 		84E19E03172EAFF200BC6D21 /* plane30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane30x30.png; sourceTree = "<group>"; };
 		84E19E05172EB10A00BC6D21 /* plane60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane60x60.png; sourceTree = "<group>"; };
@@ -230,6 +231,7 @@
 				8449570F173ECEE7008225EE /* AircraftType.m */,
 				84495711173ED358008225EE /* TypeStore.h */,
 				84495712173ED358008225EE /* TypeStore.m */,
+				84C104DA1743B62D00D3915F /* WBGlobalConstants.h */,
 				8441D952172C61D400B8D86E /* AircraftStore.h */,
 				8441D953172C61D400B8D86E /* AircraftStore.m */,
 				8441D947172C607A00B8D86E /* EnvelopePoint.h */,

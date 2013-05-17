@@ -30,6 +30,8 @@
 @property (strong, nonatomic) IBOutlet EnvelopeGraph *graphInset;
 @property (weak, nonatomic) IBOutlet UISwitch *tksSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *o2Switch;
+@property (weak, nonatomic) IBOutlet UILabel *TKSLabel;
+@property (weak, nonatomic) IBOutlet UILabel *o2Label;
 
 - (IBAction)backgroundTapped :(id)sender;
 - (IBAction)updateSwitches;

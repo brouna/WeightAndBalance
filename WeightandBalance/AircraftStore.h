@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Aircraft.h"
+#import "WBGlobalConstants.h"
 
 @interface AircraftStore : NSObject
 

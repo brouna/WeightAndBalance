@@ -8,6 +8,7 @@
 
 #import "AircraftStore.h"
 
+
 @implementation AircraftStore
 
 
@@ -87,8 +88,7 @@
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentDirectory = documentDirectories[0];
-    return [documentDirectory stringByAppendingPathComponent:@"aircraft.archive"];
+    return [documentDirectory stringByAppendingPathComponent:AIRCRAFT_LIBRARY_FILE_NAME];
 }
-
 
 @end

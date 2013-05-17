@@ -20,7 +20,7 @@
 @end
 
 @implementation AircraftLoadViewController
-@synthesize frontRowLeftLabel, frontRowRightLabel, secondRowLeftLabel, secondRowRightLabel, baggage, fuelQty, inTotalLimitsLabel, bagErrorLabel, fuelErrorLabel, envelopeLimitsLabel, graphInset, tksSwitch, o2Switch;
+@synthesize frontRowLeftLabel, frontRowRightLabel, secondRowLeftLabel, secondRowRightLabel, baggage, fuelQty, inTotalLimitsLabel, bagErrorLabel, fuelErrorLabel, envelopeLimitsLabel, graphInset, tksSwitch, o2Switch, TKSLabel, o2Label;
 
 @synthesize aircraft;
 
@@ -44,10 +44,25 @@
     [secondRowRightLabel setText:[NSString stringWithFormat:@"%1.0f",[[aircraft secRowRightWt]floatValue]]];
     [baggage setText:[NSString stringWithFormat:@"%1.0f",[[[aircraft datums][WBBaggageDatum]quantity]floatValue]]];
     [fuelQty setText:[NSString stringWithFormat:@"%1.0f",[[[aircraft datums][WBFuelDatum] quantity] floatValue]]];
-    [tksSwitch setOn:([[aircraft datums][WBTKSDatum]quantity]!=0)];
-    [o2Switch setOn:([[aircraft datums][WBOxygenDatum]quantity]!=0)];
     
-    
+    if ([[aircraft maxTKS]floatValue]>0) {
+        [tksSwitch setHidden:NO];
+        [TKSLabel setHidden:NO];
+        [tksSwitch setOn:([[aircraft datums][WBTKSDatum]quantity]!=0)];
+    }
+    else {
+        [tksSwitch setHidden:YES];
+        [TKSLabel setHidden:YES];
+    }
+    if ([[aircraft maxO2]floatValue]>0) {
+        [o2Switch setHidden:NO];
+        [o2Label setHidden:NO];
+        [o2Switch setOn:([[aircraft datums][WBOxygenDatum]quantity]!=0)];
+    }
+    else {
+        [o2Switch setHidden:YES];
+        [o2Label setHidden:YES];
+    }
     [frontRowLeftLabel setDelegate:self];
     [frontRowRightLabel setDelegate:self];
     [secondRowRightLabel setDelegate:self];

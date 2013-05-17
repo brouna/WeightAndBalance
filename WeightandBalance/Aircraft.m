@@ -12,6 +12,7 @@
 #import "EnvelopePoint.h"
 #import "BalanceResult.h"
 #import "TypeStore.h"
+#import "WBGlobalConstants.h"
 
 @implementation Aircraft
 

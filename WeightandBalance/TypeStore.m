@@ -76,7 +76,7 @@
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentDirectory = documentDirectories[0];
-    return [documentDirectory stringByAppendingPathComponent:@"types.v2.archive"];
+    return [documentDirectory stringByAppendingPathComponent:TYPES_LIBRARY_FILE_NAME];
 }
 
 @end
