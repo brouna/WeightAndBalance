@@ -37,6 +37,7 @@
 		8449571C173EDDA5008225EE /* WBTypeEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8449571A173EDDA5008225EE /* WBTypeEditViewController.m */; };
 		8449571D173EDDA5008225EE /* WBTypeEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8449571B173EDDA5008225EE /* WBTypeEditViewController.xib */; };
 		84513F78173EA0F400974CAA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84513F77173EA0F400974CAA /* MessageUI.framework */; };
+		845BC187178F629B0029806B /* WeightAndBalanceMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845BC185178F61AA0029806B /* WeightAndBalanceMain.storyboard */; };
 		848B93731732B376003C5D1E /* BalanceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B93721732B376003C5D1E /* BalanceResult.m */; };
 		84AAEB981732D2DD00514054 /* EnvelopeGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AAEB971732D2DD00514054 /* EnvelopeGraph.m */; };
 		84BD56801730B32B006CB8AB /* planeAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BD567F1730B32B006CB8AB /* planeAppIcon.png */; };
@@ -98,6 +99,7 @@
 		8449571A173EDDA5008225EE /* WBTypeEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTypeEditViewController.m; sourceTree = "<group>"; };
 		8449571B173EDDA5008225EE /* WBTypeEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBTypeEditViewController.xib; sourceTree = "<group>"; };
 		84513F77173EA0F400974CAA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		845BC185178F61AA0029806B /* WeightAndBalanceMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WeightAndBalanceMain.storyboard; sourceTree = "<group>"; };
 		848B93711732B376003C5D1E /* BalanceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BalanceResult.h; path = WeightandBalance/BalanceResult.h; sourceTree = "<group>"; };
 		848B93721732B376003C5D1E /* BalanceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceResult.m; path = WeightandBalance/BalanceResult.m; sourceTree = "<group>"; };
 		84AAEB961732D2DD00514054 /* EnvelopeGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvelopeGraph.h; path = WeightandBalance/EnvelopeGraph.h; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				8441D928172C5FF600B8D86E /* WBAppDelegate.h */,
 				8441D929172C5FF600B8D86E /* WBAppDelegate.m */,
+				845BC185178F61AA0029806B /* WeightAndBalanceMain.storyboard */,
 				843B1DF8172DCB690056DEEB /* AircraftTabViewController.h */,
 				843B1DF9172DCB690056DEEB /* AircraftTabViewController.m */,
 				84FF71F517307474000CC761 /* EnvelopeCell.xib */,
@@ -302,6 +305,7 @@
 				843B1E03172DE72F0056DEEB /* AircraftLoadViewController.xib in Resources */,
 				843B1E05172DE7490056DEEB /* AircraftViewController.xib in Resources */,
 				84E19E02172EADA400BC6D21 /* plane.png in Resources */,
+				845BC187178F629B0029806B /* WeightAndBalanceMain.storyboard in Resources */,
 				84E19E04172EAFF200BC6D21 /* plane30x30.png in Resources */,
 				84E19E06172EB10A00BC6D21 /* plane60x60.png in Resources */,
 				84E19E09172EB93700BC6D21 /* editplane30x30.png in Resources */,
@@ -431,6 +435,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeightandBalance/WeightandBalance-Prefix.pch";
 				INFOPLIST_FILE = "WeightandBalance/WeightandBalance-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -446,6 +451,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeightandBalance/WeightandBalance-Prefix.pch";
 				INFOPLIST_FILE = "WeightandBalance/WeightandBalance-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

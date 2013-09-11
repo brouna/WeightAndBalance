@@ -91,16 +91,18 @@
         
         //add some numbers to the picture
     
-        CGSize maxArmSize = [[NSString stringWithFormat:@"%1.0f",maxArm] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
-        CGSize maxWeightSize = [[NSString stringWithFormat:@"%1.0f",maxWeight] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
-        CGSize yLabelSize = [[NSString stringWithFormat:Y_AXIS_LABEL] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
-        CGSize xLabelSize = [[NSString stringWithFormat:X_AXIS_LABEL] sizeWithFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        //need to create a NSdictionary for the string attributes
+        NSDictionary *labelDict = [[NSDictionary alloc] initWithObjects:@[[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]]forKeys:@[NSFontAttributeName]];
+        
+        CGSize maxArmSize = [[NSString stringWithFormat:@"%1.0f",maxArm] sizeWithAttributes:labelDict];
+        CGSize maxWeightSize = [[NSString stringWithFormat:@"%1.0f",maxWeight] sizeWithAttributes:labelDict];
+        CGSize xLabelSize = [[NSString stringWithFormat:X_AXIS_LABEL] sizeWithAttributes:labelDict];
+        CGSize yLabelSize = [[NSString stringWithFormat:Y_AXIS_LABEL] sizeWithAttributes:labelDict];
         
         
-        [[NSString stringWithFormat:@"%1.0f",minArm] drawAtPoint:CGPointMake(FRAME_SIZE_IN_POINTS, self.bounds.size.height- FRAME_SIZE_IN_POINTS) withFont:[UIFont italicSystemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        [[NSString stringWithFormat:@"%1.0f",minArm] drawAtPoint:CGPointMake(FRAME_SIZE_IN_POINTS, self.bounds.size.height- FRAME_SIZE_IN_POINTS) withAttributes:labelDict];
     
-        [[NSString stringWithFormat:@"%1.0f",maxArm] drawAtPoint:CGPointMake(self.bounds.size.width-maxArmSize.width-FRAME_SIZE_IN_POINTS, self.bounds.size.height - FRAME_SIZE_IN_POINTS) withFont:[UIFont italicSystemFontOfSize:8]];
-        
+        [[NSString stringWithFormat:@"%1.0f",maxArm] drawAtPoint:CGPointMake(self.bounds.size.width-maxArmSize.width-FRAME_SIZE_IN_POINTS, self.bounds.size.height - FRAME_SIZE_IN_POINTS) withAttributes:labelDict];
 
         
         [self drawVerticallyAtPoint:[NSString stringWithFormat:@"%1.0f",maxWeight]
@@ -117,7 +119,7 @@
         
         [self drawVerticallyAtPoint:Y_AXIS_LABEL withContext:cgx atPoint:CGPointMake(1, (graphRect.size.height+yLabelSize.width)/2+graphRect.origin.y) withFont:[UIFont systemFontOfSize:LABEL_SIZE_IN_POINTS]];
         
-        [X_AXIS_LABEL drawAtPoint:CGPointMake(graphRect.origin.x+(graphRect.size.width-xLabelSize.width)/2 , self.bounds.size.height-FRAME_SIZE_IN_POINTS) withFont:[UIFont systemFontOfSize:LABEL_SIZE_IN_POINTS]];
+        [X_AXIS_LABEL drawAtPoint:CGPointMake(graphRect.origin.x+(graphRect.size.width-xLabelSize.width)/2 , self.bounds.size.height-FRAME_SIZE_IN_POINTS) withAttributes:labelDict];
        
         float hScale = (graphRect.size.width/(maxArm - minArm)) ;
         float vScale = (graphRect.size.height)/(maxWeight - minWeight);
@@ -179,7 +181,10 @@
         CGAffineTransform textTransform = CGAffineTransformMakeRotation(-M_PI_2);
         CGContextConcatCTM(context, textTransform);
         CGContextTranslateCTM(context, -point.x, -point.y);
-        [string drawAtPoint:point withFont:font];
+        NSDictionary *labelDict = [[NSDictionary alloc] initWithObjects:@[font]
+                                                                forKeys:@[NSFontAttributeName]];
+        
+        [string drawAtPoint:point withAttributes:labelDict];
         CGContextRestoreGState(context);
     }
     
