@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WBTypeSelectViewController : UITableViewController
-@property (strong, nonatomic) IBOutlet UITableView *typeTableView;
+@property (weak, nonatomic) IBOutlet UITableView *typeTableView;
 
 @end

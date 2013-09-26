@@ -10,20 +10,20 @@
 @class Aircraft;
 @class EnvelopePoint;
 @class EnvelopeGraph;
+@class EnvelopeCell;
 
-@interface EnvelopeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface EnvelopeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSMutableArray *envelope;
 @property (strong, nonatomic) NSNumber *maxGross;
 
-@property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *tableHeaderLabel;
 @property (strong, nonatomic) IBOutlet UITableView *envTableView;
-
 @property (strong, nonatomic) IBOutlet UIView *envelopePopoverView;
 @property (strong, nonatomic) IBOutlet UIView *envelopePopoverSmallView;
 @property (strong, nonatomic) IBOutlet UITextField *popoverWeight;
 @property (strong, nonatomic) IBOutlet UITextField *popoverArm;
-@property (strong, nonatomic) IBOutlet UIView *graphView;
+//@property (strong, nonatomic) IBOutlet UIView *graphView;
 @property (strong, nonatomic) IBOutlet EnvelopeGraph *graphInset;
 
 

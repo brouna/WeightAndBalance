@@ -15,16 +15,62 @@
 
 
 @implementation WBTypeEditViewController
+
+{
+    UITextField *activeField;
+}
+
 @synthesize scrollView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (void)registerForKeyboardNotifications
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
 }
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;  //get the size of the keyboard
+    
+    
+    CGRect navigationFrame = [[self.navigationController navigationBar] frame];
+    CGFloat heightFoNavBar = navigationFrame.size.height;                             //get a correction for the navigation bar if present
+    
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(heightFoNavBar, 0.0, kbSize.height, 0.0);
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= (kbSize.height+heightFoNavBar);
+    CGPoint bottomOfField = CGPointMake(activeField.frame.origin.x, activeField.frame.origin.y+activeField.frame.size.height);
+    
+    
+    if (!CGRectContainsPoint(aRect, bottomOfField) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, bottomOfField.y-kbSize.height-heightFoNavBar);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+}
+
 
 - (void)viewDidLoad
 {
@@ -84,22 +130,24 @@
     [_TKSALabel setDelegate: self];
     [_O2ALabel setDelegate: self];
     [_O2WLabel setDelegate: self];
+    
+    
+    [self registerForKeyboardNotifications];
+    [self resetScrollWindow];
 
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    [scrollView setFrame:self.view.bounds];
-    [scrollView setContentSize:CGSizeMake(320, 460)];
-    
-
-    
+    [super viewDidAppear:animated];
+    [self resetScrollWindow];
 }
+
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [scrollView setFrame:CGRectMake(0, 0, 320, 200)];
-    [scrollView scrollRectToVisible:[textField frame] animated:YES];
+    activeField = textField;
+    
 }
 
 -(void) viewWillDisappear:(BOOL)animated
@@ -137,32 +185,57 @@
     [_type setMaxGross:@([[_MGWLabel text]floatValue])];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (IBAction)backgroundTapped:(id)sender {
     [[self view] endEditing:YES];
-    [scrollView setFrame:self.view.bounds];
-}
+  }
 
-- (IBAction)setEnvelope {
-   EnvelopeViewController *evc = [[EnvelopeViewController alloc] init];
-    evc.envelope = _type.envelope;
-    evc.maxGross = _type.maxGross;
-    [self.navigationController pushViewController:evc animated:YES];
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"editTypeEnvelope"]) {
+        EnvelopeViewController *evc = segue.destinationViewController;
+        evc.envelope = _type.envelope;
+        evc.maxGross = _type.maxGross;
+        [self resetScrollWindow];
+        if (activeField) {
+            [activeField resignFirstResponder];
+            activeField = nil;
+        }
+
+    }
     
 }
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    [scrollView setFrame:self.view.bounds];
-    [scrollView scrollRectToVisible:[textField frame] animated:YES];
     return YES;
 }
+
+-(void) textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
+-(void)resetScrollWindow
+{
+    // Set the scroll view's content size to be the same width as the
+    // application's frame but set its height to be the height of the
+    // application frame minus the height of the navigation bar's frame
+    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+    CGRect navigationFrame = [[self.navigationController navigationBar] frame];
+    CGFloat height = applicationFrame.size.height - navigationFrame.size.height;
+    CGSize newContentSize = CGSizeMake(applicationFrame.size.width, height);
+    
+    scrollView.contentSize = newContentSize;
+    
+    [scrollView setContentOffset:(CGPointMake(0.0, 0.0)) animated:NO];
+    
+}
+
+
 
 @end

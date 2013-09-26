@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *O2WLabel;
 @property (weak, nonatomic) IBOutlet UITextField *O2ALabel;
 @property (weak, nonatomic) IBOutlet UITextField *MGWLabel;
-- (IBAction)setEnvelope;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)backgroundTapped:(id)sender;
 

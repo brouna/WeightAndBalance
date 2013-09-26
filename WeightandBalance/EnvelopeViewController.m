@@ -24,7 +24,7 @@
 { EnvelopePoint *currentEP;    // will hold the selected row's envelope point for the purposes of editing
 }
 @synthesize envelope, maxGross;
-@synthesize envTableView, envelopePopoverView, popoverArm, popoverWeight, envelopePopoverSmallView, graphView ,tableHeaderLabel, graphInset;
+@synthesize envTableView, envelopePopoverView, popoverArm, popoverWeight, envelopePopoverSmallView, graphInset;
 
 
 - (void)viewDidLoad
@@ -37,30 +37,13 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTable:)];
     [[self navigationItem] setRightBarButtonItems:@[editButton,addButton]];
-    
-    //set the cell up
-    //Load the NIB file to be our cell of choice
-    UINib *nib = [UINib nibWithNibName:@"EnvelopeCell" bundle:nil];
-        //register with the view controller
-    [[self envTableView] registerNib:nib forCellReuseIdentifier:@"EnvelopeCell"];
-    
-    //assemble the views...
-    [[self view] addSubview:envTableView];
-    
+
     [graphInset setEnvelope:envelope];
     [graphInset setCurrentLoading:nil];
-    [[self view] addSubview:graphView];
-    [graphView setFrame:CGRectMake(0, 270, [self view].bounds.size.width, 150)];
+ 
 }
 
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    envelopePopoverView = nil;
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
@@ -105,7 +88,6 @@
 {
     [super viewWillDisappear:animated];
     graphInset = nil;
-    graphView = nil;
     envTableView = nil;
 }
 
@@ -121,15 +103,16 @@
     return [envelope count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (EnvelopeCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"EnvelopeCell";
-    EnvelopeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    EnvelopeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EnvelopeCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    [cell setEp:envelope[indexPath.row]];
-    [cell setMaxGross:maxGross];                    // cell needs the Max Gross so it can warn about MGW overage
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    EnvelopePoint *ep = envelope[indexPath.row];
+    
+    [cell.weightLabel setText:[NSString stringWithFormat:@"%1.1f",[[ep weight]floatValue]]];
+    [cell.armLabel setText:[NSString stringWithFormat:@"%1.1f",[[ep arm] floatValue]]];
+    [cell.weightWarning setHidden:([[ep weight]floatValue]<=[[self maxGross] floatValue])];
     
     return cell;
 }
@@ -188,12 +171,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
  
-    [[self view] addSubview:envelopePopoverView];
+   [[self view] bringSubviewToFront:envelopePopoverView];
     [envelopePopoverView setHidden:NO];
     [envelopePopoverView setAlpha:1.0];
-    [envelopePopoverView setUserInteractionEnabled:YES];
     [envelopePopoverView setExclusiveTouch:YES];
-    
+    [envelopePopoverView setUserInteractionEnabled:YES];
+    [envelopePopoverSmallView setHidden:NO];
+    [envelopePopoverSmallView setAlpha:1.0];
     
     //add a shadow on the inner view
     envelopePopoverSmallView.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -211,17 +195,28 @@
     [popoverWeight setText:[NSString stringWithFormat:@"%1.1f",[[currentEP weight]floatValue]]];
     [popoverArm setText:[NSString stringWithFormat:@"%1.1f",[[currentEP arm]floatValue]]];
     
+    [popoverArm setDelegate:self];
+    [popoverWeight setDelegate:self];
+    
+}
 
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
 }
 
 - (IBAction)dismissPopover {
     [currentEP setArm:@([[popoverArm text]floatValue])];
     [currentEP setWeight:@([[popoverWeight text]floatValue])];
     
+    [popoverWeight resignFirstResponder];
+    [popoverWeight resignFirstResponder];
+    
     [envelopePopoverView setExclusiveTouch:NO];
+    [envelopePopoverView setUserInteractionEnabled:NO];
     [envelopePopoverView setHidden:YES];
-    [envelopePopoverView removeFromSuperview];
-    [[self envTableView] reloadData];
+    [[self view] sendSubviewToBack:envelopePopoverView];
+    [envTableView reloadData];
     [graphInset setNeedsDisplay];
     
 }

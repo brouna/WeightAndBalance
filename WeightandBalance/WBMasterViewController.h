@@ -15,6 +15,4 @@
 
 @interface WBMasterViewController : UITableViewController
 
-@property (strong, nonatomic) AircraftTabViewController *tvc;
-
 @end

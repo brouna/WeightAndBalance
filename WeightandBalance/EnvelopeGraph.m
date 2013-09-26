@@ -64,7 +64,7 @@
         
         
         CGContextSetLineWidth(cgx, ENVELOPE_LINE_WIDTH);
-        CGContextSetStrokeColor (cgx, CGColorGetComponents([[UIColor ENVELOPE_LINE_COLOR]CGColor]));
+        CGContextSetStrokeColorWithColor (cgx, [[UIColor ENVELOPE_LINE_COLOR]CGColor]);
         
         //create a resuable path for the envelope (we'll use it both to draw and to calc whether the X is inside)
         CGMutablePathRef envelopePath = CGPathCreateMutable();
@@ -154,8 +154,8 @@
             
             //evaluate if the cross is inside the envelope
             BOOL crossIsInside  = CGPathContainsPoint(envelopePath, NULL, CGPointMake(crossX, crossY), NO);
-            CGContextSetStrokeColor (cgx, (crossIsInside) ? CGColorGetComponents([[UIColor greenColor]CGColor]) :
-                                                            CGColorGetComponents([[UIColor redColor]CGColor]));
+            CGContextSetStrokeColorWithColor (cgx, (crossIsInside) ? [[UIColor greenColor]CGColor] :
+                                                                     [[UIColor redColor]CGColor]);
             
             
             // draw an X

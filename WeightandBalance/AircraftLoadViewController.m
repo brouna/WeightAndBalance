@@ -171,7 +171,7 @@
         [df setTimeStyle:NSDateFormatterFullStyle];
         
         
-        NSString *text = [NSString stringWithFormat:@"Weight and Balance Calculaction\n=============================\n\nCalculated on %@\nFor %@ %@\n\n", [df stringFromDate:today], [aircraft typeName], [aircraft tailNumber]];
+        NSString *text = [NSString stringWithFormat:@"Weight and Balance Calculaction\n===========================\n\nCalculated on %@\nFor %@ %@\n\n", [df stringFromDate:today], [aircraft typeName], [aircraft tailNumber]];
   
         
         text = [text stringByAppendingFormat: @"Front row:%5.1f lbs %5.1f in\n",[[aircraft pilotWt]floatValue]+[[aircraft coPilotWt]floatValue],[[aircraft frontArm]floatValue]];
@@ -181,7 +181,8 @@
             text = [text stringByAppendingFormat: @"%18@:%5.1f lbs %5.1f in\n",[d name],[d weightAsFloat],[d armAsFloat]];
         }
         text = [text stringByAppendingFormat:@"--------------------------------------\nTotal Weight:%5.1f lbs  Arm:%5.1f in  Moment/1000:%5.1f \n\n",[aircraft totalWeight], [aircraft totalMoment]/[aircraft totalWeight],[aircraft totalMoment]/1000];
-    
+        
+        text = [text stringByAppendingFormat:@"Calculation result:%@\n", [[aircraft isAircraftInBalance]result]];
         
         [mailView setMessageBody:text isHTML:NO];
         [self presentViewController:mailView animated:YES completion:nil];

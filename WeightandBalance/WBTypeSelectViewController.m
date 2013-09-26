@@ -73,12 +73,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier                forIndexPath:indexPath];
 
+    
     //Add buttons
     UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [editButton addTarget:self
@@ -158,31 +155,43 @@
 
 -(void) editType:(id) sender
 {
-    //Get the superview from this button which will be our cell
-	UITableViewCell *owningCell = (UITableViewCell*)[sender superview];
+    //Get the superview from this button which will be our cell...keep moving up the view hierarchy until we hit a UITableViewCell
+    
+	UITableViewCell *owningCell = (UITableViewCell*)[[sender superview]superview];
     
 	//From the cell get its index path.
-	NSIndexPath *pathToCell = [typeTableView indexPathForCell:owningCell];
     
+    
+	NSIndexPath *pathToCell = [typeTableView indexPathForCell:owningCell];
     AircraftType *chosen = [[TypeStore defaultStore]allTypes][pathToCell.row];
-    WBTypeEditViewController *editView = [[WBTypeEditViewController alloc]init];
-    editView.type = chosen;
-    [self.navigationController pushViewController:editView animated:YES];
+    
+    [self performSegueWithIdentifier:@"EditType" sender:chosen];
+     
 }
 
 
 -(void) selectType:(id) sender
 {
     //Get the superview from this button which will be our cell
-	UITableViewCell *owningCell = (UITableViewCell*)[sender superview];    
+	UITableViewCell *owningCell = (UITableViewCell*)[[sender superview]superview];
 	//From the cell get its index path.
 	NSIndexPath *pathToCell = [typeTableView indexPathForCell:owningCell];
     
     AircraftType *chosen = [[TypeStore defaultStore]allTypes][pathToCell.row];
     Aircraft *aircraftOfType = [[Aircraft alloc]initSelfWithType:chosen.typeName andTail:@"New"];
     [[AircraftStore defaultStore] addAircraft:aircraftOfType];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:TRUE ];
+}
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"EditType"]){
+        WBTypeEditViewController *wb = segue.destinationViewController;
+        if ([sender class] == [AircraftType class]) {
+            wb.type = sender;
+        }
+        
+    }
 }
 
 @end

@@ -32,38 +32,40 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //  Look for an aircraft view controller and a load view controller in the tabs
+    AircraftLoadViewController *lvc = [[AircraftLoadViewController alloc]init];
+    AircraftViewController *avc = [[AircraftViewController alloc]init];
     
-}
+    for (id thisVC in self.childViewControllers) {
+        if ([thisVC isKindOfClass:[AircraftLoadViewController class]]) {
+            lvc = thisVC;
+        }
+        if ([thisVC isKindOfClass:[AircraftViewController class]]) {
+            avc = thisVC;
+        }
+      
+        [avc setEditing:YES];
+        [avc setTabBarItem: [[UITabBarItem alloc] initWithTitle:@"Edit" image:[UIImage imageNamed:@"editplane30x30.png"] tag:0] ];
+        [avc setAircraft:aircraft];
+        [avc setCreateNew:([[aircraft tailNumber]isEqual:@"New"])];
+        [avc setTitle:[@"Edit " stringByAppendingString:([aircraft tailNumber]?[aircraft tailNumber]:@"")]];
+        
+      
+        [lvc setEditing:YES];
+        [lvc setTabBarItem:[[UITabBarItem alloc]initWithTitle:@"Load" image:[UIImage imageNamed:@"loadplane30x30.png"] tag:1]];
+        [lvc setAircraft:aircraft];
 
+        
+    }
+}
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //create the tab bar by creating an array of view controllers
-    
-    AircraftViewController *avc = [[AircraftViewController alloc]initWithNibName:@"AircraftViewController" bundle:nil];
-    [avc setEditing:YES];
-    [avc setTabBarItem: [[UITabBarItem alloc] initWithTitle:@"Edit" image:[UIImage imageNamed:@"editplane30x30.png"] tag:0] ];
-    [avc setAircraft:aircraft];
-    [avc setCreateNew:([[aircraft tailNumber]isEqual:@"New"])];
-    [avc setTitle:[@"Edit " stringByAppendingString:([aircraft tailNumber]?[aircraft tailNumber]:@"")]];
-    
-    AircraftLoadViewController *lvc = [[AircraftLoadViewController alloc]initWithNibName:@"AircraftLoadViewController" bundle:nil];
-    [lvc setEditing:YES];
-    [lvc setTabBarItem:[[UITabBarItem alloc]initWithTitle:@"Load" image:[UIImage imageNamed:@"loadplane30x30.png"] tag:1]];
-    [lvc setAircraft:aircraft];
-   
-    NSArray *vcs = @[lvc, avc];
-    [self setViewControllers:vcs];
-    if ([[aircraft tailNumber]isEqualToString:@"New"])
-        [self setSelectedViewController:avc];       //For new ac, start on the edit tab
-    
+
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+
 
 @end

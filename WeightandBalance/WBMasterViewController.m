@@ -10,7 +10,11 @@
 #import "AircraftTabViewController.h"
 #import "WBTypeSelectViewController.h"
 
+
+
 @implementation WBMasterViewController
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -21,31 +25,18 @@
     return self;
 }
 							
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)insertNewObject:(id)sender
+/*- (void)insertNewObject:(id)sender
 {
     
     WBTypeSelectViewController *typeSelectView = [[WBTypeSelectViewController alloc]init];
     [self.navigationController pushViewController:typeSelectView animated:YES];
     
 }
+*/
 
-#pragma mark - Table View
+
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -105,33 +96,33 @@
     }
 }
 
+
+/*
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     [[AircraftStore defaultStore] moveAircraftAtIndex:[fromIndexPath row] To:[toIndexPath row]];
 
 }
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
 */
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (!self.tvc) {
-        self.tvc = [[AircraftTabViewController alloc] initWithNibName:@"AircraftTabViewController" bundle:nil];
+    if([segue.identifier isEqualToString:@"selectAircraft"])
+    {
+        NSIndexPath *index = [self.tableView indexPathForSelectedRow];
+        AircraftTabViewController *tvc = segue.destinationViewController;
+        
+        Aircraft *chosen = [[AircraftStore defaultStore] allAircraft][[index row]];
+        [tvc setTitle:[chosen tailNumber]];
+        tvc.aircraft = chosen;
+        tvc.createNew = NO;
     }
+    else if ([segue.identifier isEqualToString:@"addAircraft"])
+        {
+
+        }
     
-    Aircraft *chosen = [[AircraftStore defaultStore] allAircraft][[indexPath row]];
-    
-    [self.tvc setTitle:[chosen tailNumber]];
-    self.tvc.aircraft = chosen;
-    self.tvc.createNew = NO;
-    [self.navigationController pushViewController:self.tvc animated:YES];
 }
 
 @end

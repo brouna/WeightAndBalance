@@ -31,11 +31,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *o2ALabel;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIView *fullView;
+
 
 - (IBAction)backgroundTapped:(id)sender;
-
-- (IBAction)editEnvelope;
 
 
 @end
