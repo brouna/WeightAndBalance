@@ -116,7 +116,7 @@
         Aircraft *chosen = [[AircraftStore defaultStore] allAircraft][[index row]];
         [tvc setTitle:[chosen tailNumber]];
         tvc.aircraft = chosen;
-        tvc.createNew = NO;
+        tvc.createNew = ([chosen.tailNumber isEqualToString:@"New"]);
     }
     else if ([segue.identifier isEqualToString:@"addAircraft"])
         {
