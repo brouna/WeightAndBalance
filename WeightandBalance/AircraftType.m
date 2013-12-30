@@ -24,11 +24,11 @@
         [_envelope addObject:[[EnvelopePoint alloc]init]]; //add a blank envelope point
         
         _datums = [[NSMutableDictionary alloc]initWithObjects:@[
-                           [[Datum alloc]initWithName:WBBasicEmptyDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0],
-                           [[Datum alloc]initWithName:WBFuelDatum Quantity:@0 WeightPerQuantity: FUEL_LBS_PER_GALLON andArm:@0],
-                           [[Datum alloc]initWithName:WBTKSDatum Quantity:@0 WeightPerQuantity:TKS_LBS_PER_GALLON andArm:@0],
-                           [[Datum alloc]initWithName:WBOxygenDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0],
-                           [[Datum alloc]initWithName:WBBaggageDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0]]
+                           [[Datum alloc]initWithName:WBBasicEmptyDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0.0f],
+                           [[Datum alloc]initWithName:WBFuelDatum Quantity:@0 WeightPerQuantity: FUEL_LBS_PER_GALLON andArm:@0.0f],
+                           [[Datum alloc]initWithName:WBTKSDatum Quantity:@0 WeightPerQuantity:TKS_LBS_PER_GALLON andArm:@0.0f],
+                           [[Datum alloc]initWithName:WBOxygenDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0.0f],
+                           [[Datum alloc]initWithName:WBBaggageDatum Quantity:@0 WeightPerQuantity:@1 andArm:@0.0f]]
                         forKeys:@[WBBasicEmptyDatum,WBFuelDatum,WBTKSDatum, WBOxygenDatum, WBBaggageDatum]];
     }
     return self;

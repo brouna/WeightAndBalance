@@ -51,7 +51,7 @@
     scrollView.scrollIndicatorInsets = contentInsets;
     
     // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your application might not need or want this behavior.
+
     CGRect aRect = self.view.frame;
     aRect.size.height -= (kbSize.height+heightFoNavBar);
     CGPoint bottomOfField = CGPointMake(activeField.frame.origin.x, activeField.frame.origin.y+activeField.frame.size.height);
@@ -101,6 +101,20 @@
     NSNumber *mb = [_type maxBaggage];
     NSNumber *mg = [_type maxGross];
     
+    // experimental stuff to change keyboard
+    UIToolbar *accessory = [self createToolBar];   // adds a +/- button to the Arm keyboards
+    _bewALabel.inputAccessoryView = accessory;
+    _frontALabel.inputAccessoryView = accessory;
+    _backALabel.inputAccessoryView = accessory;
+    _bagALabel.inputAccessoryView = accessory;
+    _fuelALabel.inputAccessoryView = accessory;
+    _TKSALabel.inputAccessoryView = accessory;
+    _O2ALabel.inputAccessoryView = accessory;
+    
+    
+    
+    // end exp
+    
     [_typeLabel setText:[_type typeName]];
     [_bewALabel setText:([bewa floatValue]==0 ? @"":[NSString stringWithFormat:@"%1.1f",[bewa floatValue]])];
     [_bewWlabel setText:([beww integerValue]==0 ? @"":[NSString stringWithFormat:@"%i",[beww integerValue]])];
@@ -126,6 +140,7 @@
     [_fuelQlabel setDelegate:self];
     [_MGWLabel setDelegate:self];
     [_bagWLabel setDelegate:self];
+    [_bagALabel setDelegate:self];
     [_TKSQLabel setDelegate:self];
     [_TKSALabel setDelegate: self];
     [_O2ALabel setDelegate: self];
@@ -233,6 +248,33 @@
     scrollView.contentSize = newContentSize;
     
     [scrollView setContentOffset:(CGPointMake(0.0, 0.0)) animated:NO];
+    
+}
+
+-(UIToolbar *) createToolBar
+{
+    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0f, 0.0f, self.view.window.frame.size.width, 44.0f)];
+    
+    toolbar.tintColor = [UIColor colorWithRed:0.56f
+                                        green:0.59f
+                                         blue:0.63f
+                                        alpha:1.0f];
+    toolbar.translucent = NO;
+    toolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"+/-" style:UIBarButtonItemStyleBordered target:self action:@selector(changeSign:)]];
+    
+    return toolbar;
+    
+}
+
+-(void)changeSign:(UIBarButtonItem *) sender
+{
+    
+    if (activeField.isFirstResponder){
+        if ([[activeField text] floatValue] != 0 )
+        {
+            activeField.text = [NSString stringWithFormat:@"%1.1f", (-1 * [[activeField text]floatValue])];
+        }
+    }
     
 }
 

@@ -33,6 +33,9 @@
     [self setTitle:@"Envelope"];
 
     [envelopePopoverView setHidden:YES];
+    
+    UIToolbar *accessory = [self createToolBar];
+    popoverArm.inputAccessoryView = accessory;  // add the +/- button to the arm field
         
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTable:)];
@@ -218,6 +221,34 @@
     [[self view] sendSubviewToBack:envelopePopoverView];
     [envTableView reloadData];
     [graphInset setNeedsDisplay];
+    
+}
+
+
+-(UIToolbar *) createToolBar
+{
+    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0f, 0.0f, self.view.window.frame.size.width, 44.0f)];
+    
+    toolbar.tintColor = [UIColor colorWithRed:0.56f
+                                        green:0.59f
+                                         blue:0.63f
+                                        alpha:1.0f];
+    toolbar.translucent = NO;
+    toolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"+/-" style:UIBarButtonItemStyleBordered target:self action:@selector(changeSign:)]];
+    
+    return toolbar;
+    
+}
+
+-(void)changeSign:(UIBarButtonItem *) sender
+{
+    
+    if (popoverArm.isFirstResponder){
+        if ([[popoverArm text] floatValue] != 0 )
+        {
+            popoverArm.text = [NSString stringWithFormat:@"%1.1f", (-1 * [[popoverArm text]floatValue])];
+        }
+    }
     
 }
 

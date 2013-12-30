@@ -95,6 +95,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    UIToolbar *accessory = [self createToolBar];  // add +/- button to arms labels
+    bewALabel.inputAccessoryView = accessory;
+    frontALabel.inputAccessoryView = accessory;
+    backALabel.inputAccessoryView = accessory;
+    baggageALabel.inputAccessoryView = accessory;
+    fuelAlabel.inputAccessoryView = accessory;
+    tksALabel.inputAccessoryView = accessory;
+    o2ALabel.inputAccessoryView = accessory;
+    
+    
     
     Datum *bew = [aircraft datums][WBBasicEmptyDatum];
     NSNumber *bewa = [bew arm];
@@ -146,6 +156,7 @@
     [backALabel setDelegate:self];
     [fuelAlabel setDelegate:self];
     [fuelCLabel setDelegate:self];
+    [baggageALabel setDelegate:self];
     [mgwLabel setDelegate:self];
     [maxBaggageWt setDelegate:self];
     [tksWLabel setDelegate:self];
@@ -256,6 +267,33 @@
     
     [scrollView setContentOffset:(CGPointMake(0.0, 0.0)) animated:NO];
 
+}
+
+-(UIToolbar *) createToolBar
+{
+    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0f, 0.0f, self.view.window.frame.size.width, 44.0f)];
+    
+    toolbar.tintColor = [UIColor colorWithRed:0.56f
+                                        green:0.59f
+                                         blue:0.63f
+                                        alpha:1.0f];
+    toolbar.translucent = NO;
+    toolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"+/-" style:UIBarButtonItemStyleBordered target:self action:@selector(changeSign:)]];
+    
+    return toolbar;
+    
+}
+
+-(void)changeSign:(UIBarButtonItem *) sender
+{
+    
+    if (activeField.isFirstResponder){
+        if ([[activeField text] floatValue] != 0 )
+        {
+            activeField.text = [NSString stringWithFormat:@"%1.1f", (-1 * [[activeField text]floatValue])];
+        }
+    }
+    
 }
 
 
