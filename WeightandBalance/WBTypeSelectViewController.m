@@ -143,14 +143,13 @@
 
 -(void) insertNewObject:(id)sender
 {
-    AircraftType *t = [[AircraftType alloc]init];
-    WBTypeEditViewController *blankType = [[WBTypeEditViewController alloc]init];
-    blankType.type = t;
-    [self.navigationController pushViewController:blankType animated:YES];
+    
+    // First add a new aircraft type to the datastore, then edit it using the segue
+    
+    AircraftType *t = [[AircraftType alloc]initWithName:@""];
     [[TypeStore defaultStore]addType:t];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-
+    [self performSegueWithIdentifier:@"EditType" sender:t];
+    
 }
 
 -(void) editType:(id) sender

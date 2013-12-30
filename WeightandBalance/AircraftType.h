@@ -21,4 +21,9 @@
 @property (nonatomic, strong) NSNumber *frontArm, *backArm;
 @property (nonatomic, strong) NSMutableDictionary *datums;
 @property (nonatomic, strong) NSMutableArray *envelope;  //will hold an array of envelope points
+
+
+-(id) initWithName: (NSString *)newName; //designated initializer
+
+
 @end
