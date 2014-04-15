@@ -20,8 +20,8 @@
 -(AircraftType *) createType;
 -(void) addType:(AircraftType *)a;
 -(void) removeType: (AircraftType *)a;
--(void) moveAircraftTypeAtIndex:(int)from
-                              To:(int)to;
+-(void) moveAircraftTypeAtIndex:(long)from
+                             To:(long)to;
 -(BOOL) saveChanges;
 -(NSString *)itemArchivePath;   // returns the path to the type archive file
 

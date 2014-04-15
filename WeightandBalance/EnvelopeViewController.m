@@ -195,8 +195,8 @@
     
     currentEP =  envelope[indexPath.row];
     
-    [popoverWeight setText:[NSString stringWithFormat:@"%1.1f",[[currentEP weight]floatValue]]];
-    [popoverArm setText:[NSString stringWithFormat:@"%1.1f",[[currentEP arm]floatValue]]];
+    [popoverWeight setText:([[currentEP weight]floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[[currentEP weight]floatValue]])];
+    [popoverArm setText:([[currentEP arm]floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.1f",[[currentEP arm]floatValue]])];
     
     [popoverArm setDelegate:self];
     [popoverWeight setDelegate:self];

@@ -38,12 +38,13 @@
 {
     [super viewDidLoad];
 	//load up the fields if there's data to be had
-    [frontRowLeftLabel setText:[NSString stringWithFormat:@"%1.0f",[[aircraft pilotWt]floatValue]]];
-    [frontRowRightLabel setText:[NSString stringWithFormat:@"%1.0f",[[aircraft coPilotWt]floatValue]]];
-    [secondRowLeftLabel setText:[NSString stringWithFormat:@"%1.0f",[[aircraft secRowLeftWt]floatValue]]];
-    [secondRowRightLabel setText:[NSString stringWithFormat:@"%1.0f",[[aircraft secRowRightWt]floatValue]]];
-    [baggage setText:[NSString stringWithFormat:@"%1.0f",[[[aircraft datums][WBBaggageDatum]quantity]floatValue]]];
-    [fuelQty setText:[NSString stringWithFormat:@"%1.0f",[[[aircraft datums][WBFuelDatum] quantity] floatValue]]];
+    
+    [frontRowLeftLabel setText:([[aircraft pilotWt]floatValue]==0 ? @"":[NSString stringWithFormat:@"%1.0f",[[aircraft pilotWt]floatValue]])];
+    [frontRowRightLabel setText:([[aircraft coPilotWt]floatValue]==0 ? @"":[NSString stringWithFormat:@"%1.0f",[[aircraft coPilotWt]floatValue]])];
+    [secondRowLeftLabel setText:([[aircraft secRowLeftWt]floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.0f",[[aircraft secRowLeftWt]floatValue]])];
+    [secondRowRightLabel setText:([[aircraft secRowRightWt]floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.0f",[[aircraft secRowRightWt]floatValue]])];
+    [baggage setText:([[[aircraft datums][WBBaggageDatum]quantity]floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.0f",[[[aircraft datums][WBBaggageDatum]quantity]floatValue]])];
+    [fuelQty setText:([[[aircraft datums][WBFuelDatum]quantity]floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.0f",[[[aircraft datums][WBFuelDatum] quantity] floatValue]])];
     
     if ([[aircraft maxTKS]floatValue]>0) {
         [tksSwitch setHidden:NO];

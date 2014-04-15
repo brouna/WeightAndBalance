@@ -58,26 +58,27 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;  //get the size of the keyboard
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;  //get the size of the keyboard
     
 
     CGRect navigationFrame = [[self.navigationController navigationBar] frame];
-    CGFloat heightFoNavBar = navigationFrame.size.height;                             //get a correction for the navigation bar if present
+    CGFloat heightForNavBar = navigationFrame.size.height;                             //get a correction for the navigation bar if present
     
 
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(heightFoNavBar, 0.0, kbSize.height, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(heightForNavBar, 0.0, kbSize.height, 0.0);
     scrollView.contentInset = contentInsets;
     scrollView.scrollIndicatorInsets = contentInsets;
     
     // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your application might not need or want this behavior.
+ 
     CGRect aRect = self.view.frame;
-    aRect.size.height -= (kbSize.height+heightFoNavBar);
+    aRect.size.height -= (kbSize.height+heightForNavBar);
     CGPoint bottomOfField = CGPointMake(activeField.frame.origin.x, activeField.frame.origin.y+activeField.frame.size.height);
     
     
     if (!CGRectContainsPoint(aRect, bottomOfField) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, bottomOfField.y-kbSize.height-heightFoNavBar);
+        CGPoint scrollPoint = CGPointMake(0.0, bottomOfField.y-kbSize.height-heightForNavBar);
+        scrollPoint.y = (scrollPoint.y<0 ? 0 : scrollPoint.y);
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
 }
@@ -88,6 +89,7 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     scrollView.contentInset = contentInsets;
     scrollView.scrollIndicatorInsets = contentInsets;
+    [self resetScrollWindow];
 }
 
 - (void)viewDidLoad
@@ -133,13 +135,13 @@
     [tailLabel setText:[aircraft tailNumber]];
     [typeLabel setText:[aircraft typeName]];
     [bewALabel setText:([bewa floatValue]==0 ? @"":[NSString stringWithFormat:@"%1.1f",[bewa floatValue]])];
-    [bewWLabel setText:([beww integerValue]==0 ? @"":[NSString stringWithFormat:@"%i",[beww integerValue]])];
+    [bewWLabel setText:([beww integerValue]==0 ? @"":[NSString stringWithFormat:@"%li",(long)[beww integerValue]])];
     [frontALabel setText:([fa floatValue]==0 ? @"":[NSString stringWithFormat:@"%1.1f",[fa floatValue]])];
     [backALabel setText:([ba floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.1f",[ba floatValue]])];
     [baggageALabel setText:([bga floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.1f",[bga floatValue]])];
     [fuelAlabel setText:([fuela floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[fuela floatValue]])];
     [fuelCLabel setText:([mf floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.1f",[mf floatValue]])];
-    [mgwLabel  setText:([mg integerValue]==0 ? @"" : [NSString stringWithFormat:@"%i",[mg integerValue]])];
+    [mgwLabel  setText:([mg integerValue]==0 ? @"" : [NSString stringWithFormat:@"%li",(long)[mg integerValue]])];
     [maxBaggageWt setText:([mb floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[mb floatValue]])];
     [tksWLabel setText:([tksq floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[tksq floatValue]])];
     [tksALabel setText:([tksa floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[tksa floatValue]])];
@@ -263,9 +265,11 @@
     CGFloat height = applicationFrame.size.height - navigationFrame.size.height;
     CGSize newContentSize = CGSizeMake(applicationFrame.size.width, height);
     
+    CGFloat newTop = applicationFrame.origin.y+navigationFrame.size.height;
+    
     scrollView.contentSize = newContentSize;
     
-    [scrollView setContentOffset:(CGPointMake(0.0, 0.0)) animated:NO];
+    [scrollView setContentOffset:(CGPointMake(0.0, -newTop)) animated:NO];
 
 }
 

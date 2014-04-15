@@ -101,7 +101,7 @@
     NSNumber *mb = [_type maxBaggage];
     NSNumber *mg = [_type maxGross];
     
-    // experimental stuff to change keyboard
+    //Change keyboard
     UIToolbar *accessory = [self createToolBar];   // adds a +/- button to the Arm keyboards
     _bewALabel.inputAccessoryView = accessory;
     _frontALabel.inputAccessoryView = accessory;
@@ -112,18 +112,15 @@
     _O2ALabel.inputAccessoryView = accessory;
     
     
-    
-    // end exp
-    
     [_typeLabel setText:[_type typeName]];
     [_bewALabel setText:([bewa floatValue]==0 ? @"":[NSString stringWithFormat:@"%1.1f",[bewa floatValue]])];
-    [_bewWlabel setText:([beww integerValue]==0 ? @"":[NSString stringWithFormat:@"%i",[beww integerValue]])];
+    [_bewWlabel setText:([beww integerValue]==0 ? @"":[NSString stringWithFormat:@"%li",(long)[beww integerValue]])];
     [_frontALabel setText:([fa floatValue]==0 ? @"":[NSString stringWithFormat:@"%1.1f",[fa floatValue]])];
     [_backALabel setText:([ba floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.1f",[ba floatValue]])];
     [_bagALabel setText:([bga floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.1f",[bga floatValue]])];
     [_fuelALabel setText:([fuela floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[fuela floatValue]])];
     [_fuelQlabel setText:([mf floatValue]==0 ? @"" :[NSString stringWithFormat:@"%1.1f",[mf floatValue]])];
-    [_MGWLabel  setText:([mg integerValue]==0 ? @"" : [NSString stringWithFormat:@"%i",[mg integerValue]])];
+    [_MGWLabel  setText:([mg integerValue]==0 ? @"" : [NSString stringWithFormat:@"%li",(long)[mg integerValue]])];
     [_bagWLabel setText:([mb floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[mb floatValue]])];
     [_TKSQLabel setText:([tksq floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[tksq floatValue]])];
     [_TKSALabel setText:([tksa floatValue]==0 ? @"" : [NSString stringWithFormat:@"%1.1f",[tksa floatValue]])];
@@ -151,6 +148,7 @@
     [self resetScrollWindow];
 
 }
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -237,6 +235,8 @@
 
 -(void)resetScrollWindow
 {
+    
+    
     // Set the scroll view's content size to be the same width as the
     // application's frame but set its height to be the height of the
     // application frame minus the height of the navigation bar's frame

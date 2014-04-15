@@ -56,8 +56,8 @@
 { [allTypes removeObject:a];}
 
 
--(void) moveAircraftTypeAtIndex:(int)from
-                             To:(int)to;
+-(void) moveAircraftTypeAtIndex:(long)from
+                             To:(long)to;
 
 {   if (from != to) {
         AircraftType *a = allTypes[from];
