@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="6yZ-zJ-agc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="6yZ-zJ-agc">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Master View Controller - Select or add aircraft-->
+        <!--Select or add aircraft-->
         <scene sceneID="r3H-Qk-LYi">
             <objects>
                 <tableViewController id="f9R-21-xZe" customClass="WBMasterViewController" sceneMemberID="viewController">
@@ -67,7 +66,7 @@
             </objects>
             <point key="canvasLocation" x="1014" y="134"/>
         </scene>
-        <!--Aircraft Load View Controller - Load Aircraft-->
+        <!--Load Aircraft-->
         <scene sceneID="dS2-wc-NwL">
             <objects>
                 <viewController id="tct-30-w1Z" customClass="AircraftLoadViewController" sceneMemberID="viewController">
@@ -337,7 +336,7 @@
             </objects>
             <point key="canvasLocation" x="1982" y="-240"/>
         </scene>
-        <!--Aircraft Tab View Controller - Load or Edit Aircraft-->
+        <!--Load or Edit Aircraft-->
         <scene sceneID="n9b-u3-JJU">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="hMm-yT-wT3" customClass="AircraftTabViewController" sceneMemberID="viewController">
@@ -398,7 +397,7 @@
             </objects>
             <point key="canvasLocation" x="1285" y="1215"/>
         </scene>
-        <!--Type Edit View Controller - Edit Type-->
+        <!--Edit Type-->
         <scene sceneID="AjF-ro-D2X">
             <objects>
                 <viewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="NfF-Ok-dc2" customClass="WBTypeEditViewController" sceneMemberID="viewController">
@@ -623,7 +622,6 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
                     <connections>
                         <outlet property="MGWLabel" destination="sBe-F3-1O7" id="y5o-Uh-nMf"/>
                         <outlet property="O2ALabel" destination="sdE-0c-6D7" id="fLo-m6-bsC"/>
@@ -651,26 +649,23 @@
             </objects>
             <point key="canvasLocation" x="1776" y="1255"/>
         </scene>
-        <!--Envelope View Controller - Edit Envelope-->
+        <!--Edit Envelope-->
         <scene sceneID="i1i-6F-e6h">
             <objects>
                 <viewController id="lg7-Ge-HzJ" customClass="EnvelopeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lhr-bQ-Yzu">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                         <subviews>
                             <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="zU7-0m-2bL" customClass="EnvelopeGraph">
-                                <rect key="frame" x="0.0" y="293" width="320" height="163"/>
+                                <rect key="frame" x="0.0" y="366" width="320" height="203"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.90411154199999999" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="top" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="38" sectionHeaderHeight="22" sectionFooterHeight="22" id="pWg-hj-fjk">
-                                <rect key="frame" x="0.0" y="64" width="320" height="234"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                                <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                                <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="293"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c9V-DS-Wwv">
@@ -802,7 +797,7 @@
             </objects>
             <point key="canvasLocation" x="2555" y="913"/>
         </scene>
-        <!--Aircraft View Controller - Edit Aircraft-->
+        <!--Edit Aircraft-->
         <scene sceneID="6aU-zU-uL2">
             <objects>
                 <viewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="E1h-yc-1dU" customClass="AircraftViewController" sceneMemberID="viewController">
@@ -1098,6 +1093,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Tok-hh-ddO"/>
+        <segue reference="vjs-FY-Mip"/>
     </inferredMetricsTieBreakers>
 </document>

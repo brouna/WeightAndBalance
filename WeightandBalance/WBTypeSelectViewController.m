@@ -156,7 +156,7 @@
 {
     //Get the superview from this button which will be our cell...keep moving up the view hierarchy until we hit a UITableViewCell
     
-	UITableViewCell *owningCell = (UITableViewCell*)[[sender superview]superview];
+	UITableViewCell *owningCell = (UITableViewCell*)[sender superview];
     
 	//From the cell get its index path.
     
@@ -172,7 +172,7 @@
 -(void) selectType:(id) sender
 {
     //Get the superview from this button which will be our cell
-	UITableViewCell *owningCell = (UITableViewCell*)[[sender superview]superview];
+	UITableViewCell *owningCell = (UITableViewCell*)[sender superview];
 	//From the cell get its index path.
 	NSIndexPath *pathToCell = [typeTableView indexPathForCell:owningCell];
     
