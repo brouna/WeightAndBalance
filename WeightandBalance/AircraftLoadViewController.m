@@ -20,7 +20,7 @@
 @end
 
 @implementation AircraftLoadViewController
-@synthesize frontRowLeftLabel, frontRowRightLabel, secondRowLeftLabel, secondRowRightLabel, baggage, fuelQty, inTotalLimitsLabel, bagErrorLabel, fuelErrorLabel, envelopeLimitsLabel, graphInset, tksSwitch, o2Switch, TKSLabel, o2Label;
+@synthesize frontRowLeftLabel, frontRowRightLabel, secondRowLeftLabel, secondRowRightLabel, baggage, fuelQty, inTotalLimitsLabel, envelopeLimitsLabel, graphInset, tksSwitch, o2Switch, TKSLabel, o2Label;
 
 @synthesize aircraft;
 
@@ -200,9 +200,13 @@
 
 -(void) checkLimits {
 
-    //First check fuel and baggage
-    [bagErrorLabel setHidden:[aircraft isBaggageWithinLimits]];
-    [fuelErrorLabel setHidden:[aircraft isFuelWithinLimits]];
+    //First check fuel and baggage and set the background color of the field if they are over
+    [baggage setBackgroundColor:([aircraft isBaggageWithinLimits] ?
+                                 [UIColor clearColor] :
+                                 [UIColor redColor])];
+    [fuelQty setBackgroundColor:([aircraft isFuelWithinLimits] ?
+                                 [UIColor clearColor] :
+                                 [UIColor redColor])];
     
     
     //Now mgw

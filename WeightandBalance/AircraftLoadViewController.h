@@ -23,10 +23,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *baggage;
 @property (weak, nonatomic) IBOutlet UITextField *fuelQty;
 @property (weak, nonatomic) IBOutlet UILabel *inTotalLimitsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bagErrorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *fuelErrorLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *bagErrorLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *fuelErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *envelopeLimitsLabel;
-@property (weak, nonatomic) IBOutlet UIView *graphView;
+//@property (weak, nonatomic) IBOutlet UIView *graphView;
 @property (strong, nonatomic) IBOutlet EnvelopeGraph *graphInset;
 @property (weak, nonatomic) IBOutlet UISwitch *tksSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *o2Switch;

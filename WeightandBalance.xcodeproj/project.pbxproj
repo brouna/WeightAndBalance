@@ -37,6 +37,8 @@
 		8455E2A717E0E8A600B4365D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8455E2A617E0E8A600B4365D /* Images.xcassets */; };
 		845BC187178F629B0029806B /* WeightAndBalanceMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845BC185178F61AA0029806B /* WeightAndBalanceMain.storyboard */; };
 		848B93731732B376003C5D1E /* BalanceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B93721732B376003C5D1E /* BalanceResult.m */; };
+		848FE0ED1A113C6200D455CD /* LoadPlane.png in Resources */ = {isa = PBXBuildFile; fileRef = 848FE0EB1A113C6200D455CD /* LoadPlane.png */; };
+		848FE0EE1A113C6200D455CD /* LoadPlane@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 848FE0EC1A113C6200D455CD /* LoadPlane@2x.png */; };
 		84AAEB981732D2DD00514054 /* EnvelopeGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AAEB971732D2DD00514054 /* EnvelopeGraph.m */; };
 		84BD56801730B32B006CB8AB /* planeAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BD567F1730B32B006CB8AB /* planeAppIcon.png */; };
 		84BD56821730B335006CB8AB /* planeAppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BD56811730B335006CB8AB /* planeAppIcon@2x.png */; };
@@ -98,6 +100,8 @@
 		845BC185178F61AA0029806B /* WeightAndBalanceMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WeightAndBalanceMain.storyboard; sourceTree = "<group>"; };
 		848B93711732B376003C5D1E /* BalanceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BalanceResult.h; path = WeightandBalance/BalanceResult.h; sourceTree = "<group>"; };
 		848B93721732B376003C5D1E /* BalanceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceResult.m; path = WeightandBalance/BalanceResult.m; sourceTree = "<group>"; };
+		848FE0EB1A113C6200D455CD /* LoadPlane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoadPlane.png; sourceTree = "<group>"; };
+		848FE0EC1A113C6200D455CD /* LoadPlane@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoadPlane@2x.png"; sourceTree = "<group>"; };
 		84AAEB961732D2DD00514054 /* EnvelopeGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeGraph.h; sourceTree = "<group>"; };
 		84AAEB971732D2DD00514054 /* EnvelopeGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvelopeGraph.m; sourceTree = "<group>"; };
 		84BD567F1730B32B006CB8AB /* planeAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planeAppIcon.png; path = ../planeAppIcon.png; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 		8441D920172C5FF600B8D86E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				848FE0EB1A113C6200D455CD /* LoadPlane.png */,
+				848FE0EC1A113C6200D455CD /* LoadPlane@2x.png */,
 				840D2B43180064D400022A75 /* planeAppIcon@120.png */,
 				840D2B3F1800644100022A75 /* planeAppIcon@58px.png */,
 				840D2B401800644100022A75 /* planeAppIcon@80px.png */,
@@ -299,6 +305,7 @@
 				840D2B411800644100022A75 /* planeAppIcon@58px.png in Resources */,
 				8441D924172C5FF600B8D86E /* InfoPlist.strings in Resources */,
 				840D2B421800644100022A75 /* planeAppIcon@80px.png in Resources */,
+				848FE0ED1A113C6200D455CD /* LoadPlane.png in Resources */,
 				8441D92C172C5FF600B8D86E /* Default.png in Resources */,
 				8441D92E172C5FF600B8D86E /* Default@2x.png in Resources */,
 				8441D930172C5FF600B8D86E /* Default-568h@2x.png in Resources */,
@@ -312,6 +319,7 @@
 				84BD56801730B32B006CB8AB /* planeAppIcon.png in Resources */,
 				84BD56821730B335006CB8AB /* planeAppIcon@2x.png in Resources */,
 				840D2B44180064D400022A75 /* planeAppIcon@120.png in Resources */,
+				848FE0EE1A113C6200D455CD /* LoadPlane@2x.png in Resources */,
 				843D6BC21742C39100758DDB /* initialtypes.v2.archive in Resources */,
 				84FF5DB71986B48500B253C4 /* initialtypes.v3.archive in Resources */,
 			);

@@ -166,18 +166,14 @@
         CGPoint loadPoint = CGPointMake([self totalMoment]/[self totalWeight], [self totalWeight]);
         NSLog(@"Weight is %1.1f and arm %1.1f",[self totalWeight], [self totalMoment]/[self totalWeight]);
         //And test if it's in the envelope!
-        if(CGPathContainsPoint(envelopePath, NULL, loadPoint, NO)) {
-            [result setResultForCondition:WBinBalanceCondition];
-            
-        } else {
-            [result setResultForCondition:WBoutOfBalanceGeneric];
+        if(CGPathContainsPoint(envelopePath, NULL, loadPoint, NO))
+             [result setResultForCondition:WBinBalanceCondition];
+        
+        else [result setResultForCondition:WBoutOfBalanceGeneric];
+        
+        CGPathRelease(envelopePath);
         }
-    
-    
-    CGPathRelease(envelopePath);
-    } else {
-        [result setResultForCondition:WBinsufficientEnvelope];
-    }
+        else [result setResultForCondition:WBinsufficientEnvelope];
     
     return result;
 }
