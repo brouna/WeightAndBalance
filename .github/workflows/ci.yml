@@ -1,0 +1,30 @@
+name: CI
+
+# Runs on pull requests and on demand (Actions tab → CI → Run workflow).
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  model-tests:
+    name: Model tests (Linux)
+    runs-on: ubuntu-latest
+    container: swift:6.2-noble
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift test
+
+  ios-build:
+    name: iOS app build and model tests (macOS)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build app for the simulator
+        run: |
+          xcodebuild build \
+            -project WeightandBalance.xcodeproj \
+            -target WeightandBalance \
+            -sdk iphonesimulator \
+            CODE_SIGNING_ALLOWED=NO
+      - name: Model tests
+        run: swift test

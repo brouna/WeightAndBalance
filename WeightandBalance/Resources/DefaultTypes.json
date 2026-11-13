@@ -1,0 +1,232 @@
+[
+  {
+    "configuration" : {
+      "baggageArm" : 208,
+      "emptyArm" : 137.8,
+      "emptyWeight" : 2100,
+      "envelope" : [
+        {
+          "arm" : 137.8,
+          "id" : "0E075E2D-E80F-4B21-B436-A103410439A4",
+          "weight" : 2100
+        },
+        {
+          "arm" : 139.1,
+          "id" : "B119F837-3643-491E-A6FF-644DEE2F7ECE",
+          "weight" : 2700
+        },
+        {
+          "arm" : 142.3,
+          "id" : "BB069B13-FBAA-4AAD-B616-70276108F7C3",
+          "weight" : 3400
+        },
+        {
+          "arm" : 148.1,
+          "id" : "30C7404B-B774-401B-B222-A93F9160427D",
+          "weight" : 3400
+        },
+        {
+          "arm" : 148.1,
+          "id" : "A2023A20-84E8-46F6-8390-C219CB68B794",
+          "weight" : 2100
+        }
+      ],
+      "frontSeatArm" : 143.5,
+      "fuelArm" : 154.9,
+      "fuelCapacity" : 84,
+      "maxBaggageWeight" : 130,
+      "maxGrossWeight" : 3400,
+      "oxygenArm" : 0,
+      "oxygenWeight" : 0,
+      "rearSeatArm" : 180,
+      "tksArm" : 0,
+      "tksCapacity" : 0
+    },
+    "id" : "A920C88E-1BCE-4551-AFBB-2FD15EA6D846",
+    "name" : "SR22"
+  },
+  {
+    "configuration" : {
+      "baggageArm" : 208,
+      "emptyArm" : 139.5,
+      "emptyWeight" : 2489,
+      "envelope" : [
+        {
+          "arm" : 137.8,
+          "id" : "02D5424A-696F-4C09-90CB-161CB250E85C",
+          "weight" : 2100
+        },
+        {
+          "arm" : 139.1,
+          "id" : "54153323-4DC2-473A-83EE-C6D5612776A2",
+          "weight" : 2700
+        },
+        {
+          "arm" : 142.3,
+          "id" : "0A1B05F8-9D5E-40E3-88F4-B2C9BB1D74B6",
+          "weight" : 3400
+        },
+        {
+          "arm" : 148.1,
+          "id" : "853B2500-39B7-4DA1-B0AE-D6C55E803535",
+          "weight" : 3400
+        },
+        {
+          "arm" : 148.1,
+          "id" : "07C6A619-0E55-4521-B478-78361AB80495",
+          "weight" : 2100
+        }
+      ],
+      "frontSeatArm" : 143.5,
+      "fuelArm" : 154.9,
+      "fuelCapacity" : 92,
+      "maxBaggageWeight" : 130,
+      "maxGrossWeight" : 3400,
+      "oxygenArm" : 265.3,
+      "oxygenWeight" : 23.8,
+      "rearSeatArm" : 180,
+      "tksArm" : 148,
+      "tksCapacity" : 3.5
+    },
+    "id" : "F8BE01F9-06A1-42D0-864C-B5C65E486562",
+    "name" : "SR22T\/TN"
+  },
+  {
+    "configuration" : {
+      "baggageArm" : 142.8,
+      "emptyArm" : 84.8,
+      "emptyWeight" : 1890,
+      "envelope" : [
+        {
+          "arm" : 82,
+          "id" : "304867F7-488F-4C71-AA2D-5F6D75E911CA",
+          "weight" : 1400
+        },
+        {
+          "arm" : 82,
+          "id" : "4A512AFE-2DD5-41C9-9101-0E73CD50F0A3",
+          "weight" : 2375
+        },
+        {
+          "arm" : 88.9,
+          "id" : "0519ADB1-592D-440E-A553-47F0CFBDE79E",
+          "weight" : 2750
+        },
+        {
+          "arm" : 91.5,
+          "id" : "5314D02F-F4B5-47E7-BD0B-C0BA8BAD6B35",
+          "weight" : 2750
+        },
+        {
+          "arm" : 91.5,
+          "id" : "50312091-0A27-4B76-823C-F6DE9A6F5748",
+          "weight" : 1400
+        }
+      ],
+      "frontSeatArm" : 80.5,
+      "fuelArm" : 95,
+      "fuelCapacity" : 72,
+      "maxBaggageWeight" : 200,
+      "maxGrossWeight" : 2750,
+      "oxygenArm" : 0,
+      "oxygenWeight" : 0,
+      "rearSeatArm" : 118.1,
+      "tksArm" : 0,
+      "tksCapacity" : 0
+    },
+    "id" : "54BA4CD0-4953-45B9-ADA0-6E3BA09142A4",
+    "name" : "PA-28R-201"
+  },
+  {
+    "configuration" : {
+      "baggageArm" : 142.8,
+      "emptyArm" : 86,
+      "emptyWeight" : 1431,
+      "envelope" : [
+        {
+          "arm" : 83,
+          "id" : "4C92FE72-3B3D-4E73-88DC-CBAC54CEF18D",
+          "weight" : 1200
+        },
+        {
+          "arm" : 83,
+          "id" : "906E84B8-E376-4816-8F3C-948739C72705",
+          "weight" : 1950
+        },
+        {
+          "arm" : 87,
+          "id" : "B020ADDC-04D4-4310-937D-875BE0D670D1",
+          "weight" : 2325
+        },
+        {
+          "arm" : 93,
+          "id" : "E7D82D1E-8526-4086-AD37-E3DF3D214355",
+          "weight" : 2325
+        },
+        {
+          "arm" : 93,
+          "id" : "93B23856-4924-4073-A251-324B1F545839",
+          "weight" : 1200
+        }
+      ],
+      "frontSeatArm" : 80.5,
+      "fuelArm" : 95,
+      "fuelCapacity" : 48,
+      "maxBaggageWeight" : 200,
+      "maxGrossWeight" : 2325,
+      "oxygenArm" : 0,
+      "oxygenWeight" : 0,
+      "rearSeatArm" : 118.1,
+      "tksArm" : 0,
+      "tksCapacity" : 0
+    },
+    "id" : "A3D7BE2A-1B57-4061-BD0C-8BCD93AEBF9B",
+    "name" : "PA-28-161"
+  },
+  {
+    "configuration" : {
+      "baggageArm" : 44,
+      "emptyArm" : 106.2,
+      "emptyWeight" : 1460,
+      "envelope" : [
+        {
+          "arm" : 98.62,
+          "id" : "8FCAA72C-2945-4A9F-A7D0-A187AFE43C92",
+          "weight" : 1550
+        },
+        {
+          "arm" : 92.92,
+          "id" : "71B07231-AE28-45B4-A202-127DF84CEE23",
+          "weight" : 2400
+        },
+        {
+          "arm" : 97.92,
+          "id" : "DC9C45E4-587E-4D15-ADD0-1A67521B6968",
+          "weight" : 2400
+        },
+        {
+          "arm" : 102.5,
+          "id" : "A556F956-0E6F-4D3E-8897-AC83502745DD",
+          "weight" : 2000
+        },
+        {
+          "arm" : 102.6,
+          "id" : "F9686583-DFDB-4653-AEF0-05EAC6968D12",
+          "weight" : 1550
+        }
+      ],
+      "frontSeatArm" : 49.5,
+      "fuelArm" : 106,
+      "fuelCapacity" : 0,
+      "maxBaggageWeight" : 0,
+      "maxGrossWeight" : 2400,
+      "oxygenArm" : 0,
+      "oxygenWeight" : 0,
+      "rearSeatArm" : 79.5,
+      "tksArm" : 0,
+      "tksCapacity" : 0
+    },
+    "id" : "EAFC69DC-9F3D-4618-B802-3CDE1776C608",
+    "name" : "R44"
+  }
+]
