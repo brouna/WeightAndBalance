@@ -139,8 +139,11 @@ private struct LegacyConfigurationFields {
 }
 
 // MARK: - Legacy classes
+//
+// These are internal rather than private: on Apple platforms an NSCoding class needs a stable
+// runtime name, which private classes don't have. They are only used by `LegacyArchive`.
 
-private final class LegacyDatum: NSObject, NSSecureCoding {
+final class LegacyDatum: NSObject, NSSecureCoding {
     static var supportsSecureCoding: Bool { true }
 
     let name: String
@@ -160,7 +163,7 @@ private final class LegacyDatum: NSObject, NSSecureCoding {
     }
 }
 
-private final class LegacyEnvelopePoint: NSObject, NSSecureCoding {
+final class LegacyEnvelopePoint: NSObject, NSSecureCoding {
     static var supportsSecureCoding: Bool { true }
 
     let weight: Double
@@ -176,11 +179,11 @@ private final class LegacyEnvelopePoint: NSObject, NSSecureCoding {
     var converted: EnvelopePoint { EnvelopePoint(weight: weight, arm: arm) }
 }
 
-private final class LegacyAircraftType: NSObject, NSSecureCoding {
+final class LegacyAircraftType: NSObject, NSSecureCoding {
     static var supportsSecureCoding: Bool { true }
 
     let typeName: String
-    let fields: LegacyConfigurationFields
+    fileprivate let fields: LegacyConfigurationFields
 
     init?(coder: NSCoder) {
         typeName = coder.legacyString("typeName")
@@ -194,12 +197,12 @@ private final class LegacyAircraftType: NSObject, NSSecureCoding {
     }
 }
 
-private final class LegacyAircraft: NSObject, NSSecureCoding {
+final class LegacyAircraft: NSObject, NSSecureCoding {
     static var supportsSecureCoding: Bool { true }
 
     let tailNumber: String
     let typeName: String
-    let fields: LegacyConfigurationFields
+    fileprivate let fields: LegacyConfigurationFields
     let pilot: Double
     let coPilot: Double
     let rearLeft: Double
